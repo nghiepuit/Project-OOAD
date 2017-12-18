@@ -166,6 +166,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LoaiSanPhamController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -173,6 +176,55 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\css\bootstrap-theme.css" />
+    <Content Include="Assets\css\bootstrap-theme.min.css" />
+    <Content Include="Assets\css\bootstrap.css" />
+    <Content Include="Assets\css\bootstrap.min.css" />
+    <Content Include="Assets\css\mdb.css" />
+    <Content Include="Assets\css\mdb.min.css" />
+    <Content Include="Assets\css\style.css" />
+    <Content Include="Assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Assets\js\bootstrap.js" />
+    <Content Include="Assets\js\bootstrap.min.js" />
+    <Content Include="Assets\js\jquery-3.2.1.min.js" />
+    <Content Include="Assets\js\jquery.validate.min.js" />
+    <Content Include="Assets\js\mdb.js" />
+    <Content Include="Assets\js\mdb.min.js" />
+    <Content Include="Assets\js\modules %28optional%29\buttons.js" />
+    <Content Include="Assets\js\modules %28optional%29\cards.js" />
+    <Content Include="Assets\js\modules %28optional%29\character-counter.js" />
+    <Content Include="Assets\js\modules %28optional%29\chart.js" />
+    <Content Include="Assets\js\modules %28optional%29\chips.js" />
+    <Content Include="Assets\js\modules %28optional%29\collapsible.js" />
+    <Content Include="Assets\js\modules %28optional%29\dropdown.js" />
+    <Content Include="Assets\js\modules %28optional%29\enhanced-modals.js" />
+    <Content Include="Assets\js\modules %28optional%29\file-input.js" />
+    <Content Include="Assets\js\modules %28optional%29\forms-free.js" />
+    <Content Include="Assets\js\modules %28optional%29\hammer.js" />
+    <Content Include="Assets\js\modules %28optional%29\jarallax-video.js" />
+    <Content Include="Assets\js\modules %28optional%29\jarallax.js" />
+    <Content Include="Assets\js\modules %28optional%29\jquery.easing.js" />
+    <Content Include="Assets\js\modules %28optional%29\jquery.easypiechart.js" />
+    <Content Include="Assets\js\modules %28optional%29\jquery.hammer.js" />
+    <Content Include="Assets\js\modules %28optional%29\jquery.sticky.js" />
+    <Content Include="Assets\js\modules %28optional%29\lightbox.js" />
+    <Content Include="Assets\js\modules %28optional%29\material-select.js" />
+    <Content Include="Assets\js\modules %28optional%29\mdb-autocomplete.js" />
+    <Content Include="Assets\js\modules %28optional%29\picker-date.js" />
+    <Content Include="Assets\js\modules %28optional%29\picker-time.js" />
+    <Content Include="Assets\js\modules %28optional%29\picker.js" />
+    <Content Include="Assets\js\modules %28optional%29\preloading.js" />
+    <Content Include="Assets\js\modules %28optional%29\range-input.js" />
+    <Content Include="Assets\js\modules %28optional%29\scrollbar.js" />
+    <Content Include="Assets\js\modules %28optional%29\scrolling-navbar.js" />
+    <Content Include="Assets\js\modules %28optional%29\sidenav.js" />
+    <Content Include="Assets\js\modules %28optional%29\smooth-scroll.js" />
+    <Content Include="Assets\js\modules %28optional%29\toastr.js" />
+    <Content Include="Assets\js\modules %28optional%29\velocity.min.js" />
+    <Content Include="Assets\js\modules %28optional%29\waves.js" />
+    <Content Include="Assets\js\modules %28optional%29\wow.js" />
+    <Content Include="Assets\js\npm.js" />
+    <Content Include="Assets\js\popper.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">
@@ -195,7 +247,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Assets\" />
+    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -218,6 +270,53 @@
       <Project>{3c8734b2-0c5e-45ec-80c9-c6c7a7eddc18}</Project>
       <Name>QuanLyLinhKienMayTinh.Service</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\css\bootstrap-theme.css.map" />
+    <Content Include="Assets\css\bootstrap-theme.min.css.map" />
+    <Content Include="Assets\css\bootstrap.css.map" />
+    <Content Include="Assets\css\bootstrap.min.css.map" />
+    <Content Include="Assets\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Assets\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Assets\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Assets\fonts\glyphicons-halflings-regular.woff2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\font\roboto\Roboto-Bold.eot" />
+    <Content Include="Assets\font\roboto\Roboto-Bold.ttf" />
+    <Content Include="Assets\font\roboto\Roboto-Bold.woff" />
+    <Content Include="Assets\font\roboto\Roboto-Bold.woff2" />
+    <Content Include="Assets\font\roboto\Roboto-Light.eot" />
+    <Content Include="Assets\font\roboto\Roboto-Light.ttf" />
+    <Content Include="Assets\font\roboto\Roboto-Light.woff" />
+    <Content Include="Assets\font\roboto\Roboto-Light.woff2" />
+    <Content Include="Assets\font\roboto\Roboto-Medium.eot" />
+    <Content Include="Assets\font\roboto\Roboto-Medium.ttf" />
+    <Content Include="Assets\font\roboto\Roboto-Medium.woff" />
+    <Content Include="Assets\font\roboto\Roboto-Medium.woff2" />
+    <Content Include="Assets\font\roboto\Roboto-Regular.eot" />
+    <Content Include="Assets\font\roboto\Roboto-Regular.ttf" />
+    <Content Include="Assets\font\roboto\Roboto-Regular.woff" />
+    <Content Include="Assets\font\roboto\Roboto-Regular.woff2" />
+    <Content Include="Assets\font\roboto\Roboto-Thin.eot" />
+    <Content Include="Assets\font\roboto\Roboto-Thin.ttf" />
+    <Content Include="Assets\font\roboto\Roboto-Thin.woff" />
+    <Content Include="Assets\font\roboto\Roboto-Thin.woff2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\LoaiSanPham\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\LoaiSanPham\Create.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

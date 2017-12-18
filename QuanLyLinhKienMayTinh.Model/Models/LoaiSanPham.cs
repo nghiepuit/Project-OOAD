@@ -12,7 +12,7 @@ namespace QuanLyLinhKienMayTinh.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MaLSP { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Loại sản phẩm không được bỏ trống")]
         [DisplayName("Tên Loại Sản Phẩm")]
         public string Ten { get; set; }
 
