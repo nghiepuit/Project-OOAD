@@ -1,0 +1,10 @@
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Model\bin\Debug\QuanLyLinhKienMayTinh.Model.dll.config
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Model\bin\Debug\QuanLyLinhKienMayTinh.Model.dll
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Model\bin\Debug\QuanLyLinhKienMayTinh.Model.pdb
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Model\bin\Debug\EntityFramework.dll
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Model\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Model\bin\Debug\EntityFramework.xml
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Model\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Model\obj\Debug\QuanLyLinhKienMayTinh.Model.csprojResolveAssemblyReference.cache
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Model\obj\Debug\QuanLyLinhKienMayTinh.Model.dll
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Model\obj\Debug\QuanLyLinhKienMayTinh.Model.pdb

@@ -1,0 +1,9 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@model IEnumerable<QuanLyLinhKienMayTinh.Entities.LoaiSanPham>
+
+@foreach(var item in Model)
+{
+    @item.Ten <br/>
+}

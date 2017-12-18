@@ -1,0 +1,17 @@
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Data\bin\Debug\QuanLyLinhKienMayTinh.Data.dll.config
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Data\bin\Debug\QuanLyLinhKienMayTinh.Data.dll
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Data\bin\Debug\QuanLyLinhKienMayTinh.Data.pdb
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Data\bin\Debug\EntityFramework.dll
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Data\bin\Debug\QuanLyLinhKienMayTinh.Common.dll
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Data\bin\Debug\QuanLyLinhKienMayTinh.Common.pdb
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Data\bin\Debug\EntityFramework.xml
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Data\obj\Debug\QuanLyLinhKienMayTinh.Data.csprojResolveAssemblyReference.cache
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Data\obj\Debug\QuanLyLinhKienMayTinh.Data.dll
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Data\obj\Debug\QuanLyLinhKienMayTinh.Data.pdb
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Data\bin\Debug\QuanLyLinhKienMayTinh.Model.dll
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Data\bin\Debug\QuanLyLinhKienMayTinh.Model.pdb
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Data\bin\Debug\QuanLyLinhKienMayTinh.Model.dll.config
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Data\obj\Debug\QuanLyLinhKienMayTinh.Data.Migrations.InitialDB.resources
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Data\obj\Debug\QuanLyLinhKienMayTinh.Data.csproj.GenerateResource.Cache

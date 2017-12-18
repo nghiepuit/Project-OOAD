@@ -1,0 +1,15 @@
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Service\bin\Debug\QuanLyLinhKienMayTinh.Service.dll
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Service\bin\Debug\QuanLyLinhKienMayTinh.Service.pdb
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Service\bin\Debug\QuanLyLinhKienMayTinh.Common.dll
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Service\bin\Debug\QuanLyLinhKienMayTinh.Data.dll
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Service\bin\Debug\QuanLyLinhKienMayTinh.Model.dll
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Service\bin\Debug\QuanLyLinhKienMayTinh.Common.pdb
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Service\bin\Debug\QuanLyLinhKienMayTinh.Data.pdb
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Service\bin\Debug\QuanLyLinhKienMayTinh.Data.dll.config
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Service\bin\Debug\QuanLyLinhKienMayTinh.Model.pdb
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Service\bin\Debug\QuanLyLinhKienMayTinh.Model.dll.config
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Service\obj\Debug\QuanLyLinhKienMayTinh.Service.csprojResolveAssemblyReference.cache
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Service\obj\Debug\QuanLyLinhKienMayTinh.Service.dll
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Service\obj\Debug\QuanLyLinhKienMayTinh.Service.pdb
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Service\bin\Debug\EntityFramework.dll
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Service\bin\Debug\EntityFramework.xml

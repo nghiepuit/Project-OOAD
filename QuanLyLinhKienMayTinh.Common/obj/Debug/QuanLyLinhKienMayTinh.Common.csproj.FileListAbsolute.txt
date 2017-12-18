@@ -1,0 +1,4 @@
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Common\bin\Debug\QuanLyLinhKienMayTinh.Common.dll
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Common\bin\Debug\QuanLyLinhKienMayTinh.Common.pdb
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Common\obj\Debug\QuanLyLinhKienMayTinh.Common.dll
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Common\obj\Debug\QuanLyLinhKienMayTinh.Common.pdb
