@@ -1,5 +1,6 @@
 ﻿using QuanLyLinhKienMayTinh.Entities;
 using QuanLyLinhKienMayTinh.Service;
+using QuanLyLinhKienMayTinh.Web.Infrastructure.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,27 @@ namespace QuanLyLinhKienMayTinh.Web.Areas.Admin.Controllers
             this._spService = spService;
             this._pnService = pnService;
             this._ctpnService = ctpnService;
+        }
+
+        [HttpGet]
+        public ActionResult Index(int page = 1)
+
+        {
+            int pageSize = 10;
+            int totalRow = 0;
+            var list = _ctpnService.LayTatCaPhanTrang(page, pageSize, out totalRow);
+            int totalPage = (int)Math.Ceiling((double)totalRow / pageSize);
+            var paginationSet = new PaginationSet<ChiTietPhieuNhap>()
+            {
+                Items = list,
+                MaxPage = 5,
+                PageIndex = page,
+                TotalCount = totalRow,
+                TotalPages = totalPage,
+                Count = list.Count()
+            };
+
+            return View("DanhSachPhieuNhap", paginationSet);
         }
 
         // GET: Admin/PhieuNhap
@@ -80,7 +102,7 @@ namespace QuanLyLinhKienMayTinh.Web.Areas.Admin.Controllers
         public ActionResult NhapHangDon(PhieuNhap pn, ChiTietPhieuNhap ctpn)
         {
             ViewBag.MaNCC = _nccService.LayTatCa();
-            if(pn.NgayNhap == null)
+            if (pn.NgayNhap == null)
             {
                 pn.NgayNhap = DateTime.Now;
             }
@@ -94,6 +116,5 @@ namespace QuanLyLinhKienMayTinh.Web.Areas.Admin.Controllers
             _ctpnService.luu();
             return RedirectToAction("SanPhamSapHetHang");
         }
-
     }
 }

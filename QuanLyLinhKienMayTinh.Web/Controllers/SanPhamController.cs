@@ -25,8 +25,8 @@ namespace QuanLyLinhKienMayTinh.Web.Controllers
         {
             int pageSize = 20;
             int totalRow = 0;
-            int totalPage = (int)Math.Ceiling((double)totalRow / pageSize);
             var listSanPham = _spService.LaySanPhamTheoDanhMuc(id, nsx, page, pageSize, sort, out totalRow);
+            int totalPage = (int)Math.Ceiling((double)totalRow / pageSize);
             var paginationSet = new PaginationSet<SanPham>()
             {
                 Items = listSanPham,

@@ -2,6 +2,7 @@
 using QuanLyLinhKienMayTinh.Data.Repositories;
 using QuanLyLinhKienMayTinh.Entities;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace QuanLyLinhKienMayTinh.Service
 {
@@ -56,7 +57,9 @@ namespace QuanLyLinhKienMayTinh.Service
 
         public IEnumerable<ChiTietPhieuNhap> LayTatCaPhanTrang(int page, int pageSize, out int totalRow)
         {
-            return _ctpnRepository.GetMultiPaging(null, out totalRow, page, pageSize);
+            var query = _ctpnRepository.GetAll();
+            totalRow = query.Count();
+            return query.Skip((page - 1) * pageSize).Take(pageSize);
         }
 
         public ChiTietPhieuNhap LayTheoMa(int Ma)
