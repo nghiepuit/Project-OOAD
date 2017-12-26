@@ -9,7 +9,7 @@ namespace QuanLyLinhKienMayTinh.Data
         public QuanLyLinhKienMayTinhDbContext() : base("QuanLyLinhKienMayTinhConnection")
         {
             // load bản cha tự động include bản con
-            this.Configuration.LazyLoadingEnabled = false;
+            this.Configuration.LazyLoadingEnabled = true;
         }
 
         public DbSet<BinhLuan> BinhLuan { get; set; }

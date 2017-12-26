@@ -1,0 +1,34 @@
+﻿@using QuanLyLinhKienMayTinh.Entities;
+@model IEnumerable<SanPham>
+<div class="header-nav-main">
+    <nav>
+        <ul class="nav nav-pills" id="mainNav">
+            <li class="dropdown dropdown-mega">
+                <a href="@Url.Action("Index", "Home")">Trang Chủ</a>
+            </li>
+            @foreach (var groupItem in Model.GroupBy(x => x.LoaiSanPham))
+            {
+                if (groupItem.Key != null)
+                {
+                    <li class="dropdown dropdown-full-color dropdown-primary">
+                        <a href="/SanPham/LaySanPhamTheoDanhMuc/@groupItem.Key.MaLSP" class="dropdown-toggle">
+                            @groupItem.Key.Ten
+                        </a>
+                        <ul class="dropdown-menu">
+                            @foreach (var item in groupItem.GroupBy(x => x.NhaSanXuat))
+                            {
+                                if (item.Key != null)
+                                {
+                                    <li>
+                                        <a href="/SanPham/LaySanPhamTheoDanhMuc/@groupItem.Key.MaLSP?nsx=@item.Key.MaNSX">@item.Key.Ten</a>
+                                    </li>
+                                }
+
+                            }
+                        </ul>
+                    </li>
+                }
+            }
+        </ul>
+    </nav>
+</div>

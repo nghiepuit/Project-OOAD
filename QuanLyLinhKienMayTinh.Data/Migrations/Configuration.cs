@@ -9,7 +9,7 @@ namespace QuanLyLinhKienMayTinh.Data.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(QuanLyLinhKienMayTinh.Data.QuanLyLinhKienMayTinhDbContext context)

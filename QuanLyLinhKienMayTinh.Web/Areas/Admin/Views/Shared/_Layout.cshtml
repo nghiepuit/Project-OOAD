@@ -145,7 +145,7 @@
                     </li>
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
-                            <i class="fa"></i>
+                            <i class="fa fa-database"></i>
                             Quản Lý Nhà Cung Cấp
                             <i class="fa fa-angle-down rotate-icon"></i>
                         </a>
@@ -166,7 +166,7 @@
                     </li>
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
-                            <i class="fa"></i>
+                            <i class="fa fa-wrench"></i>
                             Quản Lý Nhà Sản Xuất
                             <i class="fa fa-angle-down rotate-icon"></i>
                         </a>
@@ -247,18 +247,6 @@
         </nav>
         <!-- /.Navbar -->
         <!-- Fixed button -->
-        <div class="fixed-action-btn clearfix d-none d-xl-block" style="bottom: 45px; right: 24px;">
-            <a class="btn-floating btn-lg red waves-effect waves-light">
-                <i class="fa fa-pencil"></i>
-            </a>
-
-            <ul>
-                <li><a class="btn-floating red waves-effect waves-light"><i class="fa fa-star"></i></a></li>
-                <li><a class="btn-floating yellow darken-1 waves-effect waves-light"><i class="fa fa-user"></i></a></li>
-                <li><a class="btn-floating green waves-effect waves-light"><i class="fa fa-envelope"></i></a></li>
-                <li><a class="btn-floating blue waves-effect waves-light"><i class="fa fa-shopping-cart"></i></a></li>
-            </ul>
-        </div>
         <!-- Fixed button -->
     </header>
 
@@ -278,7 +266,9 @@
         </div>
         <!--/.Copyright-->
     </footer>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script type="text/javascript" src="~/Assets/js/jquery-3.2.1.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script type="text/javascript" src="~/Assets/js/popper.min.js"></script>
     <script type="text/javascript" src="~/Assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/Assets/js/mdb.min.js"></script>
@@ -294,11 +284,26 @@
         });
 
         // Data Picker Initialization
-        $('.datepicker').pickadate();
+        $('.datepicker').pickadate({
+            // Strings and translations
+            monthsFull: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+            monthsShort: ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10', 'T11', 'T12'],
+            weekdaysFull: ['Chủ Nhật', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'],
+            weekdaysShort: ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'],
+            showMonthsShort: undefined,
+            showWeekdaysFull: undefined,
+            today: 'Hôm Nay',
+            clear: 'Làm Lại',
+            close: 'Đóng',
+            format: 'dd/mm/yyyy'
+        });
 
         // Material Select Initialization
         $(document).ready(function () {
             $('.mdb-select').material_select();
+            toastr.options = {
+                "preventDuplicates": true
+            }
         });
 
         // Tooltips Initialization
@@ -306,62 +311,6 @@
             $('[data-toggle="tooltip"]').tooltip()
         })
     </script>
-
-    <!-- Charts -->
-    <script>
-        // Small chart
-        $(function () {
-            $('.min-chart#chart-sales').easyPieChart({
-                barColor: "#FF5252",
-                onStep: function (from, to, percent) {
-                    $(this.el).find('.percent').text(Math.round(percent));
-                }
-            });
-        });
-
-        //Main chart
-        var ctxL = document.getElementById("lineChart").getContext('2d');
-        var myLineChart = new Chart(ctxL, {
-            type: 'line',
-            data: {
-                labels: ["January", "February", "March", "April", "May", "June", "July"],
-                datasets: [{
-                    label: "My First dataset",
-                    fillColor: "#fff",
-                    backgroundColor: 'rgba(255, 255, 255, .3)',
-                    borderColor: 'rgba(255, 99, 132)',
-                    data: [0, 10, 5, 2, 20, 30, 45],
-                }]
-            },
-            options: {
-                legend: {
-                    labels: {
-                        fontColor: "#fff",
-                    }
-                },
-                scales: {
-                    xAxes: [{
-                        gridLines: {
-                            display: true,
-                            color: "rgba(255,255,255,.25)"
-                        },
-                        ticks: {
-                            fontColor: "#fff",
-                        },
-                    }],
-                    yAxes: [{
-                        display: true,
-                        gridLines: {
-                            display: true,
-                            color: "rgba(255,255,255,.25)"
-                        },
-                        ticks: {
-                            fontColor: "#fff",
-                        },
-                    }],
-                }
-            }
-        });
-    </script>
+    @RenderSection("ClientScripts")
 </body>
 </html>

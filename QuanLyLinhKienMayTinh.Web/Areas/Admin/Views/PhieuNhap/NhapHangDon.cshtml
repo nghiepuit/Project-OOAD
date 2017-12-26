@@ -1,0 +1,136 @@
+﻿@model QuanLyLinhKienMayTinh.Entities.SanPham
+@using QuanLyLinhKienMayTinh.Entities
+@{
+    ViewBag.Title = "NhapHangDon";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    IEnumerable<NhaCungCap> listNCC = ViewBag.MaNCC as IEnumerable<NhaCungCap>;
+}
+<style>
+    div.product img {
+        height: 200px;
+        max-width: 96%;
+    }
+</style>
+
+<h2 style="text-align: center; color: red">Nhập hàng cho sản phẩm </h2>
+<legend><b>@Model.Ten</b> </legend>
+
+<div class="row product col-md-12">
+    <div class="card" style="width: 96%;">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-5 col-sm-5 col-xs-5 text-center">
+                    <img src="~/Assets/images/products/@Model.HinhAnh">
+                </div>
+                <div class="col-md-7 col-sm-7 col-xs-7">
+                    <h3 class="font-bold pink-lighter-hover mb-3 text-center">Thông Tin Sản Phẩm</h3>
+                    <h5>Hãng sản xuất: @Model.NhaSanXuat.Ten</h5>
+                    <br />
+                    <h5>Loại sản phẩm: @Model.LoaiSanPham.Ten</h5>
+                    <br />
+                    <h5>Số lượng tồn: <strong>@Model.SoLuongTon</strong></h5>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("MaSP", Model.MaSP)
+                <div class="row">
+                    <label class="control-label col-md-4">Nhà cung cấp</label>
+                    <label class="control-label col-md-4">Số lượng nhập</label>
+                    <label class="control-label col-md-4">Đơn giá nhập</label>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="md-form" style="padding: 5px 0;">
+                            <select class="mdb-select" name="MaNCC">
+                                <option disabled selected>Chọn nhà cung cấp: </option>
+                                @foreach (var item in listNCC)
+                                {
+                                    <option value="@item.MaNCC">@item.Ten</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" name="SoLuongNhap" class="form-control" value="0">
+                        <span id="tbSoLuongNhap"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" name="DonGiaNhap" class="form-control" value="0">
+                        <span id="tbDonGiaNhap"></span>
+                    </div>
+                </div>
+                <div class="clear right" style="text-align:right;">
+                    <button name="btnNhapHang" class="btn btn-success" type="submit">
+                        <i class="fa fa-check"></i>
+                        Nhập Hàng
+                    </button>
+                </div>
+            }
+        </div>
+        <div class="card-footer text-muted success-color white-text">
+            <p class="mb-0">
+                <a class="btn btn-success btn-sm" href="/Admin/PhieuNhap/SanPhamSapHetHang">
+                    <i class="fa fa-arrow-left"></i> Quay Lại
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
+
+@section ClientScripts{
+    <script>
+        $(document).ready(function () {
+            $('button[name="btnNhapHang"]').click(function () {
+                if (validateNhaCungCap() == false) {
+                    return false;
+                }
+                if (validateSoLuong() == false) {
+                    return false;
+                }
+                if (validateDonGia() == false) {
+                    return false;
+                }
+            });
+
+            function validateSoLuong() {
+                var rs = true;
+                $("input[name='SoLuongNhap']").each(function () {
+                    var value = $(this).val();
+                    if (isNaN(value) == true || parseInt(value) < 1) {
+                        toastr.error('Số lượng không hợp lệ');
+                        rs = false;
+                        return rs;
+                    }
+                });
+                return rs;
+            }
+
+            function validateDonGia() {
+                var rs = true;
+                $("input[name='DonGiaNhap']").each(function () {
+                    var value = $(this).val();
+                    if (isNaN(value) == true || parseInt(value) < 1) {
+                        toastr.error('Đơn giá không hợp lệ');
+                        rs = false;
+                        return rs;
+                    }
+                });
+                return rs;
+            }
+
+            function validateNhaCungCap() {
+                var value = $('select[name="MaNCC"]').val();
+                if (value == null) {
+                    toastr.error('Nhà cung cấp không hợp lệ');
+                    return false;
+                }
+                return true;
+            }
+
+        });
+    </script>
+}

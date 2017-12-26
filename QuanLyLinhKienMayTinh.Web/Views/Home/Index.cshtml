@@ -1,9 +1,276 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
-@model IEnumerable<QuanLyLinhKienMayTinh.Entities.LoaiSanPham>
+﻿@using QuanLyLinhKienMayTinh.Entities;
+@{
+    ViewBag.Title = "Trang Chủ";
 
-@foreach(var item in Model)
-{
-    @item.Ten <br/>
+    IEnumerable<SanPham> ListDienthoaiMoiNhat = ViewBag.ListDienthoaiMoiNhat as IEnumerable<SanPham>;
+    IEnumerable<SanPham> ListLaptopMoiNhat = ViewBag.ListLaptopMoiNhat as IEnumerable<SanPham>;
+    IEnumerable<SanPham> ListTabletMoiNhat = ViewBag.ListTabletMoiNhat as IEnumerable<SanPham>;
+    IEnumerable<SanPham> ListLinhKienMoiNhat = ViewBag.ListLinhKienMoiNhat as IEnumerable<SanPham>;
 }
+
+<div class="container">
+    <div class="home-slider-container">
+        <div class="col-md-9 col-md-offset-3">
+            <div class="owl-carousel owl-theme" data-plugin-options="{'items':1, 'loop': false}">
+                <div class="home-slide">
+                    <img src="~/Assets/img//demos/shop/slides/shop12/slide1.jpg" alt="Banner">
+                    <div class="home-slide-content">
+                        <span>Now starting at <strong>$99</strong></span>
+                        <a href="#" class="btn btn-default">SHOP NOW <i class="fa fa-caret-right"></i></a>
+                    </div>
+                </div>
+                <div class="home-slide">
+                    <img src="~/Assets/img//demos/shop/slides/shop12/slide2.jpg" alt="Banner">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="homepage-bar">
+        <div class="row">
+            <div class="col-md-4">
+                <i class="fa fa-truck bar-icon"></i>
+                <div class="bar-textarea">
+                    <h3>FREE SHIPPING &amp; RETURN</h3>
+                    <p>Free shipping on all orders over $99.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <i class="fa fa-dollar bar-icon"></i>
+                <div class="bar-textarea">
+                    <h3>MONEY BACK GUARANTEE</h3>
+                    <p>100% money back guarantee.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <i class="fa fa-support bar-icon"></i>
+                <div class="bar-textarea">
+                    <h3>ONLINE SUPPORT 24/7</h3>
+                    <p>Lorem ipsum dolor sit amet.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*
+    Điện Thoại Mới Nhất
+*@
+
+<div class="container">
+    <div class="home-products-container">
+        <ul class="products-grid columns4">
+            @if (ListDienthoaiMoiNhat != null && ListDienthoaiMoiNhat.Count() > 0)
+            {
+                foreach (var item in ListDienthoaiMoiNhat)
+                {
+                    <li>
+                        <div class="product">
+                            <figure class="product-image-area">
+                                <a href="demo-shop-12-product-details.html" title="@item.Ten" class="product-image">
+                                    <img src="~/Assets/images/products/@item.HinhAnh" alt="@item.Ten">
+                                </a>
+
+                                <a href="#" class="product-quickview">
+                                    <i class="fa fa-share-square-o"></i>
+                                    <span>Quick View</span>
+                                </a>
+                                <div class="product-label"><span class="new">New</span></div>
+                            </figure>
+                            <div class="product-details-area">
+                                <h2 class="product-name">
+                                    <a href="demo-shop-12-product-details.html" title=" @item.Ten">
+                                        @item.Ten
+                                    </a>
+                                </h2>
+                                <div class="product-ratings">
+                                    <div class="ratings-box">
+                                        <div class="rating" style="width:60%"></div>
+                                    </div>
+                                </div>
+
+                                <div class="product-price-box">
+                                    <span class="product-price">$@item.DonGia</span>
+                                </div>
+
+                                <div class="product-actions">
+                                    <a href="#" class="addtowishlist" title="Add to Wishlist">
+                                        <i class="fa fa-heart"></i>
+                                    </a>
+                                    <a href="#" class="addtocart" title="Add to Cart">
+                                        <i class="fa fa-shopping-cart"></i>
+                                        <span>Add to Cart</span>
+                                    </a>
+                                    <a href="#" class="comparelink" title="Add to Compare">
+                                        <i class="glyphicon glyphicon-signal"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+</div>
+
+<div class="container">
+    <div class="banner-container">
+        <a href="#" class="banner">
+            <img src="~/Assets/img//demos/shop/banners/shop12/banner1.jpg" alt="Banner">
+        </a>
+    </div>
+</div>
+
+@*
+    Laptop Mới Nhất
+*@
+
+<div class="container">
+    <div class="home-products-carousel-container">
+        <h2 class="slider-title">
+            <span class="inline-title">Laptop Mới Nhất</span>
+        </h2>
+
+        <div class="owl-carousel owl-theme manual home-products-carousel">
+            @if (ListLaptopMoiNhat != null && ListLaptopMoiNhat.Count() > 0)
+            {
+                foreach (var item in ListLaptopMoiNhat)
+                {
+            <div class="product">
+                <figure class="product-image-area">
+                    <a href="demo-shop-12-product-details.html" title="@item.Ten" class="product-image">
+                        <img src="~/Assets/images/products/@item.HinhAnh" alt="@item.Ten">
+                        <img src="~/Assets/images/products/@item.HinhAnh" alt="@item.Ten" class="product-hover-image">
+                    </a>
+
+                    <a href="#" class="product-quickview">
+                        <i class="fa fa-share-square-o"></i>
+                        <span>Quick View</span>
+                    </a>
+                    <div class="product-label"><span class="new">New</span></div>
+                </figure>
+                <div class="product-details-area">
+                    <h2 class="product-name"><a href="demo-shop-12-product-details.html" title="@item.Ten">@item.Ten</a></h2>
+                    <div class="product-ratings">
+                        <div class="ratings-box">
+                            <div class="rating" style="width:60%"></div>
+                        </div>
+                    </div>
+
+                    <div class="product-price-box">
+                        <span class="product-price">@item.DonGia</span>
+                    </div>
+
+                    <div class="product-actions">
+                        <a href="#" class="addtowishlist" title="Add to Wishlist">
+                            <i class="fa fa-heart"></i>
+                        </a>
+                        <a href="#" class="addtocart" title="Add to Cart">
+                            <i class="fa fa-shopping-cart"></i>
+                            <span>Add to Cart</span>
+                        </a>
+                        <a href="#" class="comparelink" title="Add to Compare">
+                            <i class="glyphicon glyphicon-signal"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="banners-container">
+        <div class="row">
+            <div class="col-xs-6 col-sm-3">
+                <a href="#" class="banner">
+                    <img src="~/Assets/img//demos/shop/banners/shop10/banner1.jpg" alt="Banner">
+                </a>
+            </div>
+            <div class="col-xs-6 col-sm-3">
+                <a href="#" class="banner">
+                    <img src="~/Assets/img//demos/shop/banners/shop10/banner2.jpg" alt="Banner">
+                </a>
+            </div>
+
+            <div class="clearfix visible-xs"></div>
+
+            <div class="col-xs-6 col-sm-3">
+                <a href="#" class="banner">
+                    <img src="~/Assets/img//demos/shop/banners/shop10/banner3.jpg" alt="Banner">
+                </a>
+            </div>
+            <div class="col-xs-6 col-sm-3">
+                <a href="#" class="banner">
+                    <img src="~/Assets/img//demos/shop/banners/shop10/banner4.jpg" alt="Banner">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*
+    Tablet Mới Nhất
+*@
+
+<div class="container">
+    <div class="home-products-carousel-container">
+        <h2 class="slider-title">
+            <span class="inline-title">Máy Tính Bảng Mới Nhất</span>
+        </h2>
+
+        <div class="owl-carousel owl-theme manual home-products-carousel">
+            @if (ListTabletMoiNhat != null && ListTabletMoiNhat.Count() > 0)
+            {
+                foreach (var item in ListTabletMoiNhat)
+                {
+                    <div class="product">
+                        <figure class="product-image-area">
+                            <a href="demo-shop-12-product-details.html" title="@item.Ten" class="product-image">
+                                <img src="~/Assets/images/products/@item.HinhAnh" alt="@item.Ten">
+                                <img src="~/Assets/images/products/@item.HinhAnh" alt="@item.Ten" class="product-hover-image">
+                            </a>
+
+                            <a href="#" class="product-quickview">
+                                <i class="fa fa-share-square-o"></i>
+                                <span>Quick View</span>
+                            </a>
+                            <div class="product-label"><span class="new">New</span></div>
+                        </figure>
+                        <div class="product-details-area">
+                            <h2 class="product-name"><a href="demo-shop-12-product-details.html" title="@item.Ten">@item.Ten</a></h2>
+                            <div class="product-ratings">
+                                <div class="ratings-box">
+                                    <div class="rating" style="width:60%"></div>
+                                </div>
+                            </div>
+
+                            <div class="product-price-box">
+                                <span class="product-price">@item.DonGia</span>
+                            </div>
+
+                            <div class="product-actions">
+                                <a href="#" class="addtowishlist" title="Add to Wishlist">
+                                    <i class="fa fa-heart"></i>
+                                </a>
+                                <a href="#" class="addtocart" title="Add to Cart">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    <span>Add to Cart</span>
+                                </a>
+                                <a href="#" class="comparelink" title="Add to Compare">
+                                    <i class="glyphicon glyphicon-signal"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+<!-- End .newsletter-popup -->

@@ -15,8 +15,7 @@ namespace QuanLyLinhKienMayTinh.Entities
         public int MaNCC { get; set; }
         [Required]
         [DisplayName("Ngày Nhập")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime NgayNhap { get; set; }
+        public DateTime? NgayNhap { get; set; }
         public bool DaXoa { get; set; }
         public virtual IEnumerable<ChiTietPhieuNhap> DanhSachChiTietPhieuNhap { get; set; }
         [ForeignKey("MaNCC")]

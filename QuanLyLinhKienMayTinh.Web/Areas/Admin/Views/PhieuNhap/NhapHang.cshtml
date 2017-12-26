@@ -1,0 +1,224 @@
+﻿@using QuanLyLinhKienMayTinh.Entities
+@{
+    ViewBag.Title = "NhapHang";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+    IEnumerable<NhaCungCap> listNCC = ViewBag.MaNCC as IEnumerable<NhaCungCap>;
+    IEnumerable<SanPham> listSanPham = ViewBag.ListSanPham as IEnumerable<SanPham>;
+}
+
+@if (ViewBag.Message != null)
+{
+    <div class="col-md-12" style="margin: 30px 0; padding: 0 !important;">
+        <h1 class="alert alert-success">@ViewBag.Message</h1>
+    </div>
+}
+
+@using (Html.BeginForm())
+{
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "alert-alert-success" })
+
+    <div class="row">
+        <div class="col-md-6">
+            <select class="mdb-select" name="MaNCC">
+                <option disabled selected>Chọn nhà cung cấp: </option>
+                @foreach (var item in listNCC)
+                {
+                    <option value="@item.MaNCC">@item.Ten</option>
+                }
+            </select>
+            <label>Chọn Nhà Cung Cấp: </label>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="md-form">
+                <input name="NgayNhap" type="text" class="form-control datepicker">
+                <label for="date-picker-example">Ngày nhập: </label>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    @* Nhập nhiều hàng *@
+    <div class="row" style="padding: 0 15px;">
+        <table class="table" id="tblPhieuNhap">
+            <tr class="trAppend" style="display: none;">
+                <td width="50%">
+                    <div class="md-form">
+                        <select class="browser-default my-select ddlSanPham" name="">
+                            <option value="" disabled selected>Chọn Sản Phẩm</option>
+                            @foreach (var item in listSanPham)
+                            {
+                                <option value="@item.MaSP">@item.Ten</option>
+                            }
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="md-form">
+                        <input type="text" name="" class="form-control txtDonGia" value="0">
+                    </div>
+                </td>
+                <td>
+                    <div class="md-form">
+                        <input type="text" name="" class="form-control txtSoLuong" value="0">
+                    </div>
+                </td>
+                <td>
+                    <button class="btn btn-danger px-3 btnDelete" type="button">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr class="trFirstChild" data-id="-1">
+                <th>Chọn Sản Phẩm</th>
+                <th>Đơn Giá Nhập</th>
+                <th>Số Lượng Nhập</th>
+                <th></th>
+            </tr>
+        </table>
+        <button type="button" class="btn btn-indigo px-4" id="btnThem1DongPhieuNhap"><i class="fa fa-plus fa-3x" aria-hidden="true"></i></button>
+        <button class="btn btn-success" id="btnNhapHang">Nhập Hàng</button>
+    </div>
+}
+
+@* DateTimePicker Library *@
+@section ClientScripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#btnThem1DongPhieuNhap').click(function () {
+                var lastDataId = parseInt($('#tblPhieuNhap').find('tr:last-child').attr('data-id')) + 1;
+                var xhtml = $('.trAppend').html();
+                var tblRow = '<tr class="trAppended" data-id="' + lastDataId + '">' + xhtml + '</tr>';
+                $('#tblPhieuNhap').append(tblRow);
+                loadNameVaoThe();
+            });
+
+            function loadNameVaoThe() {
+                $('.trAppended').each(function () {
+                    var id = $(this).attr('data-id');
+                    var maSP = '[' + id + '].MaSP';
+                    var slNhap = '[' + id + '].SoLuongNhap';
+                    var dgNhap = '[' + id + '].DonGiaNhap';
+                    $(this).find('.ddlSanPham').prop('name', maSP);
+                    $(this).find('.txtSoLuong').prop('name', slNhap);
+                    $(this).find('.txtDonGia').prop('name', dgNhap);
+                });
+            }
+
+            // Cập nhật sau khi xóa
+            function update() {
+                var lastDataId = parseInt($('#tblPhieuNhap').find('.trFirstChild').attr('data-id')) + 1;
+                $('.trAppended').each(function () {
+                    var id = lastDataId;
+                    $(this).attr('data-id', id);
+                    var maSP = '[' + id + '].MaSP';
+                    var slNhap = '[' + id + '].SoLuongNhap';
+                    var dgNhap = '[' + id + '].DonGiaNhap';
+                    $(this).find('.ddlSanPham').prop('name', maSP);
+                    $(this).find('.txtSoLuong').prop('name', slNhap);
+                    $(this).find('.txtDonGia').prop('name', dgNhap);
+                    lastDataId++;
+                });
+            }
+
+            @* Xóa 1 dòng SP *@
+            $('body').delegate('.btnDelete', 'click', function () {
+                $(this).closest(".trAppended").remove(); // tìm đến phần tử cấp cao thay vì dùng parent()
+                update();
+            });
+
+            $('#btnNhapHang').click(function (e) {
+                if (validateSanPham() == false) {
+                    return false;
+                }
+                if (validateDonGia() == false) {
+                    return false;
+                }
+                if (validateSoLuong() == false) {
+                    return false;
+                }
+                if (validateNhaCungCap() == false) {
+                    return false;
+                }
+                if (validateNgayNhap() == false) {
+                    return false;
+                }
+                if (validateChonSanPham() == false) {
+                    return false;
+                }
+            });
+
+            function validateSanPham() {
+                var rs = true;
+                $('.trAppended select.ddlSanPham').each(function () {
+                    var value = $(this).val();
+                    if (value == null) {
+                        toastr.error('Sản phẩm vừa chọn không hợp lệ');
+                        rs = false;
+                        return rs;
+                    }
+                });
+                return rs;
+            }
+
+            function validateChonSanPham() {
+                var value = $('.trAppended').length;
+                if (value < 1) {
+                    toastr.error('Thêm sản phẩm cần nhập');
+                    return false;
+                }
+                return true;
+            }
+
+            function validateNgayNhap() {
+                var value = $('input[name="NgayNhap"]').val();
+                if (value == null || value == '') {
+                    toastr.error('Ngày nhập không hợp lệ');
+                    return false;
+                }
+                return true;
+            }
+
+            function validateNhaCungCap() {
+                var value = $('select[name="MaNCC"]').val();
+                if (value == null) {
+                    toastr.error('Nhà cung cấp không hợp lệ');
+                    return false;
+                }
+                return true;
+            }
+
+            function validateDonGia(){
+                var rs = true;
+                $(".trAppended .txtDonGia").each(function () {
+                    var value = $(this).val();
+                    if (isNaN(value) == true || parseInt(value) < 1) {
+                        toastr.error('Đơn giá không hợp lệ');
+                        rs = false;
+                        return rs;
+                    }
+                });
+                return rs;
+            }
+
+            function validateSoLuong(){
+                var rs = true;
+                $(".trAppended .txtSoLuong").each(function () {
+                    var value = $(this).val();
+                    if (isNaN(value) == true || parseInt(value) < 1) {
+                        toastr.error('Số lượng không hợp lệ');
+                        rs = false;
+                        return rs;
+                    }
+                });
+                return rs;
+            }
+
+        });
+    </script>
+}
