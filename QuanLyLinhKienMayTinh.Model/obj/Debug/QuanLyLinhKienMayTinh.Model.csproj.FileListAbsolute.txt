@@ -5,6 +5,5 @@ C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Mode
 C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Model\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Model\bin\Debug\EntityFramework.xml
 C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Model\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Model\obj\Debug\QuanLyLinhKienMayTinh.Model.csprojResolveAssemblyReference.cache
 C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Model\obj\Debug\QuanLyLinhKienMayTinh.Model.dll
 C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Model\obj\Debug\QuanLyLinhKienMayTinh.Model.pdb
