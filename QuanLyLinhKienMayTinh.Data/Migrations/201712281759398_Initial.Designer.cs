@@ -13,7 +13,7 @@ namespace QuanLyLinhKienMayTinh.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201712241029486_Initial"; }
+            get { return "201712281759398_Initial"; }
         }
         
         string IMigrationMetadata.Source

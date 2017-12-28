@@ -13,5 +13,6 @@ namespace QuanLyLinhKienMayTinh.Web.Areas.Admin.Controllers
         {
             return RedirectToAction("", "ThongKe");
         }
+
     }
 }

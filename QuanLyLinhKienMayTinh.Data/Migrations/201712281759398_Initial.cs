@@ -93,19 +93,20 @@ namespace QuanLyLinhKienMayTinh.Data.Migrations
                 c => new
                     {
                         MaTV = c.Int(nullable: false, identity: true),
-                        TaiKhoan = c.String(nullable: false),
+                        TaiKhoan = c.String(nullable: false, maxLength: 20, unicode: false),
                         MatKhau = c.String(nullable: false),
                         HoTen = c.String(nullable: false),
                         DiaChi = c.String(nullable: false),
-                        Email = c.String(),
+                        Email = c.String(nullable: false),
                         DienThoai = c.String(),
                         MaLTV = c.Int(nullable: false),
                         DaXoa = c.Boolean(nullable: false),
-                        CauHoi = c.String(),
-                        CauTraLoi = c.String(),
+                        CauHoi = c.String(nullable: false),
+                        CauTraLoi = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.MaTV)
                 .ForeignKey("dbo.LoaiThanhVien", t => t.MaLTV, cascadeDelete: true)
+                .Index(t => t.TaiKhoan, unique: true)
                 .Index(t => t.MaLTV);
             
             CreateTable(
@@ -222,6 +223,7 @@ namespace QuanLyLinhKienMayTinh.Data.Migrations
             DropIndex("dbo.ChiTietDonDatHang", new[] { "MaSP" });
             DropIndex("dbo.ChiTietDonDatHang", new[] { "MaDDH" });
             DropIndex("dbo.ThanhVien", new[] { "MaLTV" });
+            DropIndex("dbo.ThanhVien", new[] { "TaiKhoan" });
             DropIndex("dbo.SanPham", new[] { "MaLSP" });
             DropIndex("dbo.SanPham", new[] { "MaNSX" });
             DropIndex("dbo.SanPham", new[] { "MaNCC" });
