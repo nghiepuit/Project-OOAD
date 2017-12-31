@@ -1,0 +1,54 @@
+﻿@model QuanLyLinhKienMayTinh.Entities.Quyen
+
+@{
+    ViewBag.Title = "Thêm Mới Quyền";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-danger text-center">Thêm Mới Quyền</h2>
+
+@if (ViewBag.Message != null)
+{
+    <div class="col-md-12" style="margin: 30px 0; padding: 0 !important;">
+        <h1 class="alert alert-success">@ViewBag.Message</h1>
+    </div>
+}
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaQuyen, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MaQuyen, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MaQuyen, "", new { @class = "badge red" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TenQuyen, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TenQuyen, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TenQuyen, "", new { @class = "badge red" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <a href="/Admin/Quyen/" class="btn btn-primary">
+                    <i class="fa fa-arrow-left"></i>
+                    Quay Lại
+                </a>
+                <button class="btn btn-success" type="submit">
+                    <i class="fa fa-save"></i>
+                    Lưu Lại
+                </button>
+            </div>
+        </div>
+    </div>
+}

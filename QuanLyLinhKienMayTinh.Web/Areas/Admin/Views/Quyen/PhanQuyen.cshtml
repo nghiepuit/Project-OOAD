@@ -1,0 +1,91 @@
+﻿@using QuanLyLinhKienMayTinh.Entities;
+@model LoaiThanhVien
+
+@{
+    ViewBag.Title = "PhanQuyen";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+    IEnumerable<Quyen> listQuyen = ViewBag.DanhSachQuyen as IEnumerable<Quyen>;
+    IEnumerable<LoaiThanhVien_Quyen> listPhanQuyen = ViewBag.DanhSachPhanQuyen as IEnumerable<LoaiThanhVien_Quyen>;
+}
+
+<h2 class="text-danger text-center">
+    Phân Quyền
+</h2>
+
+@if (ViewBag.Message != null)
+{
+    <div class="col-md-12" style="margin: 30px 0; padding: 0 !important;">
+        <h1 class="alert alert-success">@ViewBag.Message</h1>
+    </div>
+}
+
+<h3 class="main-title">Loại Thành Viên: <span class="badge red">@Model.Ten</span></h3>
+<br />
+<hr />
+@using (Html.BeginForm())
+{
+    <div class="row">
+        @Html.AntiForgeryToken()
+        @Html.Hidden("MaLTV", Model.MaLTV)
+        @if (listPhanQuyen != null)
+        {
+            for (var i = 0; i < listQuyen.Count(); i++)
+            {
+                int k = 0;
+                for (int j = 0; j < listPhanQuyen.Count(); j++)
+                {
+                    if (listQuyen.ElementAt(i).MaQuyen == listPhanQuyen.ElementAt(j).MaQuyen)
+                    {
+                        k++;
+                        break;
+                    }
+                }
+                if (k != 0)
+                {
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="hidden" value="@Model.MaLTV" name="@Url.Content("["+i+"].MaLoaiTV")" />
+                            <input checked name="@Url.Content("["+i+"].MaQuyen")" type="checkbox" class="filled-in" id="@listQuyen.ElementAt(i).MaQuyen" value="@listQuyen.ElementAt(i).MaQuyen">
+                            <label for="@listQuyen.ElementAt(i).MaQuyen">@listQuyen.ElementAt(i).TenQuyen</label>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="hidden" value="@Model.MaLTV" name="@Url.Content("["+i+"].MaLoaiTV")" />
+                            <input name="@Url.Content("["+i+"].MaQuyen")" type="checkbox" class="filled-in" id="@listQuyen.ElementAt(i).MaQuyen" value="@listQuyen.ElementAt(i).MaQuyen">
+                            <label for="@listQuyen.ElementAt(i).MaQuyen">@listQuyen.ElementAt(i).TenQuyen</label>
+                        </div>
+                    </div>
+                }
+                k = 0;
+            }
+        }
+        else
+        {
+            for (var i = 0; i < listQuyen.Count(); i++)
+            {
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="hidden" value="@Model.MaLTV" name="@Url.Content("["+i+"].MaLTV")" />
+                        <input name="@Url.Content("["+i+"].MaQuyen")" type="checkbox" class="filled-in" id="@listQuyen.ElementAt(i).MaQuyen" value="@listQuyen.ElementAt(i).MaQuyen">
+                        <label for="@listQuyen.ElementAt(i).MaQuyen">@listQuyen.ElementAt(i).TenQuyen</label>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    <div class="row">
+        <a href="/Admin/Quyen/" class="btn btn-primary">
+            <i class="fa fa-arrow-left"></i>
+            Quay Lại
+        </a>
+        <button class="btn btn-success" type="submit">
+            <i class="fa fa-check"></i>
+            Thực Hiện
+        </button>
+    </div>
+}

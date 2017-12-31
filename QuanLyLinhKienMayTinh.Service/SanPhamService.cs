@@ -70,7 +70,9 @@ namespace QuanLyLinhKienMayTinh.Service
 
         public IEnumerable<SanPham> LayTatCaPhanTrang(int page, int pageSize, out int totalRow)
         {
-            return _sanPhamRepository.GetMultiPaging(null, out totalRow, page, pageSize);
+            var query = _sanPhamRepository.GetMulti(x => x.DaXoa == false);
+            totalRow = query.Count();
+            return query.Skip((page - 1) * pageSize).Take(pageSize);
         }
 
         public SanPham LayTheoMa(int Ma)

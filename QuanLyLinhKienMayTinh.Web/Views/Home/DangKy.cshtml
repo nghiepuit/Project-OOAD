@@ -15,13 +15,13 @@
                 <h1 class="h2 heading-primary font-weight-normal mb-md mt-xs">Đăng Ký Tài Khoản</h1>
                 <div class="featured-box featured-box-primary featured-box-flat featured-box-text-left mt-md">
                     <div class="box-content">
-                        @if(ViewBag.Message != null)
+                        @if (ViewBag.Message != null)
                         {
                             <h3 class="alert alert-danger">
                                 @ViewBag.Message
                             </h3>
                         }
-                        @using (Html.BeginForm())
+                        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDangKy" }))
                         {
                             @Html.AntiForgeryToken()
                             <h4 class="heading-primary text-uppercase mb-lg">Thông Tin Cá Nhân</h4>
@@ -30,41 +30,41 @@
                                     <div class="form-group">
                                         <label class="font-weight-normal">Họ Tên <span class="required">*</span></label>
                                         @Html.TextBox("HoTen", null, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "badge red" })
+                                        @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "error" })
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-6">
                                     <div class="form-group">
                                         <label class="font-weight-normal">Địa Chỉ <span class="required">*</span></label>
                                         @Html.TextBox("DiaChi", null, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "badge red" })
+                                        @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "error" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <label class="font-weight-normal">Địa Chỉ Email <span class="required">*</span></label>
+                                        @Html.TextBox("Email", null, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "error" })
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <label class="font-weight-normal">Số Điện Thoại </label>
+                                        @Html.TextBox("DienThoai", null, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.DienThoai, "", new { @class = "error" })
                                     </div>
                                 </div>
                             </div>
                                 <div class="row">
-                                    <div class="col-xs-6">
-                                        <div class="form-group">
-                                            <label class="font-weight-normal">Địa Chỉ Email <span class="required">*</span></label>
-                                            @Html.TextBox("Email", null, new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "badge red" })
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div class="form-group">
-                                            <label class="font-weight-normal">Số Điện Thoại </label>
-                                            @Html.TextBox("DienThoai", null, new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.DienThoai, "", new { @class = "badge red" })
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <h4 class="heading-primary text-uppercase mb-lg">THÔNG TIN ĐĂNG NHẬP</h4>
-                                            <hr/>
+                                            <hr />
                                             <label class="font-weight-normal">Tài Khoản <span class="required">*</span></label>
                                             @Html.TextBox("TaiKhoan", null, new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.TaiKhoan, "", new { @class = "badge red" })
+                                            @Html.ValidationMessageFor(model => model.TaiKhoan, "", new { @class = "error" })
                                         </div>
                                     </div>
                                 </div>
@@ -73,7 +73,7 @@
                                         <div class="form-group">
                                             <label class="font-weight-normal">Mật Khẩu <span class="required">*</span></label>
                                             @Html.TextBox("MatKhau", null, new { @class = "form-control", @type = "password" })
-                                            @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "badge red" })
+                                            @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "error" })
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -126,6 +126,88 @@
         $(document).ready(function () {
             $('input[name="CaptchaInputText"]').addClass('form-control');
             $('#captcha').html($('#captcha').html().replace('Input symbols', 'Nhập Kết Quả *'));
+            $.validator.addMethod(
+                "regex",
+                function (value, element, regexp) {
+                    var re = new RegExp(regexp);
+                    return this.optional(element) || re.test(value);
+                },
+                "Điện thoại không đúng định dạng"
+            );
+            $('#frmDangKy').validate({
+                rules: {
+                    HoTen: {
+                        required: true
+                    },
+                    DiaChi: {
+                        required: true
+                    },
+                    Email: {
+                        required: true,
+                        email: true
+                    },
+                    TaiKhoan: {
+                        required: true,
+                        maxlength: 20
+                    },
+                    MatKhau: {
+                        required: true,
+                        minlength: 6,
+                        maxlength: 50
+                    },
+                    NhapLaiMatKhau: {
+                        required: true,
+                        minlength: 6,
+                        maxlength: 50,
+                        equalTo: "#MatKhau"
+                    },
+                    CauHoi: {
+                        required : true
+                    },
+                    CauTraLoi: {
+                        required: true
+                    },
+                    CaptchaInputText: {
+                        required: true
+                    }
+                },
+                messages: {
+                    HoTen: {
+                        required: "Họ tên không được bỏ trống!"
+                    },
+                    DiaChi: {
+                        required: "Địa chỉ không được bỏ trống!"
+                    },
+                    Email: {
+                        required: "Email không được bỏ trống!",
+                        email: "Email không đúng định dạng!"
+                    },
+                    TaiKhoan: {
+                        required: "Tài khoản không được bỏ trống!",
+                        maxlength: "Tài khoản phải có độ dài dưới 20 ký tự"
+                    },
+                    MatKhau: {
+                        required: "Mật khẩu không được bỏ trống!",
+                        minlength: "Mật khẩu phải có độ dài từ 6 ký tự!",
+                        maxlength: "Mật khẩu phải có độ dài tối đa 50 ký tự!"
+                    },
+                    NhapLaiMatKhau: {
+                        required: "Mật khẩu không được bỏ trống!",
+                        minlength: "Mật khẩu phải có độ dài từ 6 ký tự!",
+                        maxlength: "Mật khẩu phải có độ dài tối đa 50 ký tự!",
+                        equalTo: "Mật khẩu xác nhận không chính xác!"
+                    },
+                    CauHoi: {
+                        required: "Vui lòng chọn câu hỏi!"
+                    },
+                    CauTraLoi: {
+                        required: "Câu trả lời không được bỏ trống!"
+                    },
+                    CaptchaInputText: {
+                        required: "Vui lòng nhập mã captcha!"
+                    }
+                }
+            });
         });
     </script>
 }

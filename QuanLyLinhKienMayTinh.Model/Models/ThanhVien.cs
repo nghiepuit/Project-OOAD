@@ -13,12 +13,13 @@ namespace QuanLyLinhKienMayTinh.Entities
         public int MaTV { get; set; }
 
         [Column(TypeName = "VARCHAR")]
-        [StringLength(20, ErrorMessage = "Tài khoản phải có độ dài dưới 20 ký tự")]
+        [StringLength(20, ErrorMessage = "Tài khoản phải có độ dài dưới 20 ký tự!")]
         [Index(Order = 1, IsUnique = true)]
         [Required(ErrorMessage = "Tài khoản không được bỏ trống!")]
         [DisplayName("Tài Khoản")]
         public string TaiKhoan { get; set; }
-
+        [MinLength(6, ErrorMessage = "Mật khẩu phải có độ dài từ 6 ký tự!")]
+        [MaxLength(50, ErrorMessage = "Mật khẩu phải có độ dài tối đa 50 ký tự!")]
         [Required(ErrorMessage = "Mật khẩu không được bỏ trống!")]
         [DisplayName("Mật Khẩu")]
         public string MatKhau { get; set; }
@@ -32,11 +33,11 @@ namespace QuanLyLinhKienMayTinh.Entities
         public string DiaChi { get; set; }
 
         [Required(ErrorMessage = "Email không được bỏ trống!")]
-        [EmailAddress(ErrorMessage = "Email không đúng định dạng")]
+        [EmailAddress(ErrorMessage = "Email không đúng định dạng!")]
         [DisplayName("Email")]
         public string Email { get; set; }
 
-        [RegularExpression(@"^0(1\d{9}|9\d{8})$", ErrorMessage = "Số điện thoại không đúng định dạng.")]
+        [RegularExpression(@"^0(1\d{9}|9\d{8})$", ErrorMessage = "Số điện thoại không đúng định dạng!")]
         [DisplayName("Điện Thoại")]
         public string DienThoai { get; set; }
 
@@ -46,7 +47,7 @@ namespace QuanLyLinhKienMayTinh.Entities
          * Quên mật khẩu
          */
 
-        [Required(ErrorMessage = "Vui lòng chọn câu hỏi")]
+        [Required(ErrorMessage = "Vui lòng chọn câu hỏi!")]
         [DisplayName("Câu Hỏi")]
         public string CauHoi { get; set; }
 

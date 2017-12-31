@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "Đăng Nhập";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container main-container mt-8px">
+    <div class="wrapper-container">
+        <section class="form-section">
+            <div class="container">
+                <h1 class="h2 heading-primary font-weight-normal mb-md mt-xs">Đăng Nhập</h1>
+                <div class="featured-box featured-box-primary featured-box-flat featured-box-text-left mt-md">
+                    <div class="box-content">
+                        <form method="post" id="frmDangNhap">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-content">
+                                        <h3 class="heading-text-color font-weight-normal">
+                                            Thành Viên Mới
+                                        </h3>
+                                        <p>
+                                            Bằng cách tạo tài khoản với cửa hàng của chúng tôi, bạn sẽ có thể di chuyển qua quá trình thanh toán nhanh hơn, lưu trữ nhiều địa chỉ giao hàng, xem và theo dõi các đơn đặt hàng trong tài khoản của bạn và hơn thế nữa.
+                                        </p>
+                                    </div>
+                                    <div class="form-action clearfix">
+                                        <a href="/Home/DangKy" class="btn btn-primary">Tạo tài khoản</a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-content">
+                                        <h3 class="heading-text-color font-weight-normal">Đăng Nhập</h3>
+                                        <p>Nếu bạn đã có tài khoản, vui lòng đăng nhập</p>
+                                        @if (ViewBag.ThongBao != null)
+                                        {
+                                            <p class="error">
+                                                @ViewBag.ThongBao
+                                            </p>
+                                        }
+                                        <div class="form-group">
+                                            <label class="font-weight-normal">Tài khoản: <span class="required">*</span></label>
+                                            <input type="text" class="form-control" name="TaiKhoan" id="TaiKhoan">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="font-weight-normal">Mật khẩu: <span class="required">*</span></label>
+                                            <input type="password" class="form-control" name="MatKhau" id="MatKhau">
+                                        </div>
+                                        <p class="required">* Bắt Buộc Phải Nhập</p>
+                                    </div>
+                                    <div class="form-action clearfix">
+                                        <a href="#" class="pull-left">Quên mật khẩu?</a>
+                                        <input type="submit" class="btn btn-primary" value="Đăng nhập">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+@section ClientScripts{
+    <script>
+        $(document).ready(function () {
+            $('#frmDangNhap').validate({
+                rules: {
+                    TaiKhoan: {
+                        required: true,
+                        maxlength: 20
+                    },
+                    MatKhau: {
+                        required: true,
+                        minlength: 6,
+                        maxlength: 50
+                    }
+                },
+                messages: {
+                    TaiKhoan: {
+                        required: "Tài khoản không được bỏ trống!",
+                        maxlength: "Tài khoản phải có độ dài dưới 20 ký tự"
+                    },
+                    MatKhau: {
+                        required: "Mật khẩu không được bỏ trống!",
+                        minlength: "Mật khẩu phải có độ dài từ 6 ký tự!",
+                        maxlength: "Mật khẩu phải có độ dài tối đa 50 ký tự!"
+                    }
+                }
+            });
+        });
+    </script>
+}

@@ -2,6 +2,7 @@
 using QuanLyLinhKienMayTinh.Data.Repositories;
 using QuanLyLinhKienMayTinh.Entities;
 using System.Collections.Generic;
+using System;
 
 namespace QuanLyLinhKienMayTinh.Service
 {
@@ -22,6 +23,9 @@ namespace QuanLyLinhKienMayTinh.Service
         int TongSoPhanTu();
 
         void luu();
+
+        //custom
+        ThanhVien DangNhap(string TaiKhoan);
     }
 
     public class ThanhVienService : IThanhVienService
@@ -74,6 +78,11 @@ namespace QuanLyLinhKienMayTinh.Service
         public int TongSoPhanTu()
         {
             return _ThanhVienRepository.Count(x => x.DaXoa == false);
+        }
+
+        public ThanhVien DangNhap(string TaiKhoan)
+        {
+            return _ThanhVienRepository.GetSingleByCondition(x => x.TaiKhoan == TaiKhoan);
         }
     }
 }

@@ -33,6 +33,9 @@ namespace QuanLyLinhKienMayTinh.Data.Migrations
                         CauHinh = c.String(),
                         MoTa = c.String(),
                         HinhAnh = c.String(),
+                        HinhAnh1 = c.String(),
+                        HinhAnh2 = c.String(),
+                        HinhAnh3 = c.String(),
                         SoLuongTon = c.Int(nullable: false),
                         LuotXem = c.Int(nullable: false),
                         LuotBinhChon = c.Int(nullable: false),
@@ -94,7 +97,7 @@ namespace QuanLyLinhKienMayTinh.Data.Migrations
                     {
                         MaTV = c.Int(nullable: false, identity: true),
                         TaiKhoan = c.String(nullable: false, maxLength: 20, unicode: false),
-                        MatKhau = c.String(nullable: false),
+                        MatKhau = c.String(nullable: false, maxLength: 50),
                         HoTen = c.String(nullable: false),
                         DiaChi = c.String(nullable: false),
                         Email = c.String(nullable: false),
@@ -198,10 +201,35 @@ namespace QuanLyLinhKienMayTinh.Data.Migrations
                 .ForeignKey("dbo.NhaCungCap", t => t.MaNCC)
                 .Index(t => t.MaNCC);
             
+            CreateTable(
+                "dbo.LoaiThanhVien_Quyen",
+                c => new
+                    {
+                        MaLoaiTV = c.Int(nullable: false),
+                        MaQuyen = c.String(nullable: false, maxLength: 50, unicode: false),
+                        GhiChu = c.String(),
+                    })
+                .PrimaryKey(t => new { t.MaLoaiTV, t.MaQuyen })
+                .ForeignKey("dbo.LoaiThanhVien", t => t.MaLoaiTV)
+                .ForeignKey("dbo.Quyen", t => t.MaQuyen)
+                .Index(t => t.MaLoaiTV)
+                .Index(t => t.MaQuyen);
+            
+            CreateTable(
+                "dbo.Quyen",
+                c => new
+                    {
+                        MaQuyen = c.String(nullable: false, maxLength: 50, unicode: false),
+                        TenQuyen = c.String(nullable: false),
+                    })
+                .PrimaryKey(t => t.MaQuyen);
+            
         }
         
         public override void Down()
         {
+            DropForeignKey("dbo.LoaiThanhVien_Quyen", "MaQuyen", "dbo.Quyen");
+            DropForeignKey("dbo.LoaiThanhVien_Quyen", "MaLoaiTV", "dbo.LoaiThanhVien");
             DropForeignKey("dbo.ChiTietPhieuNhap", "MaSP", "dbo.SanPham");
             DropForeignKey("dbo.ChiTietPhieuNhap", "MaPN", "dbo.PhieuNhap");
             DropForeignKey("dbo.PhieuNhap", "MaNCC", "dbo.NhaCungCap");
@@ -215,6 +243,8 @@ namespace QuanLyLinhKienMayTinh.Data.Migrations
             DropForeignKey("dbo.SanPham", "MaNSX", "dbo.NhaSanXuat");
             DropForeignKey("dbo.SanPham", "MaNCC", "dbo.NhaCungCap");
             DropForeignKey("dbo.SanPham", "MaLSP", "dbo.LoaiSanPham");
+            DropIndex("dbo.LoaiThanhVien_Quyen", new[] { "MaQuyen" });
+            DropIndex("dbo.LoaiThanhVien_Quyen", new[] { "MaLoaiTV" });
             DropIndex("dbo.PhieuNhap", new[] { "MaNCC" });
             DropIndex("dbo.ChiTietPhieuNhap", new[] { "MaSP" });
             DropIndex("dbo.ChiTietPhieuNhap", new[] { "MaPN" });
@@ -229,6 +259,8 @@ namespace QuanLyLinhKienMayTinh.Data.Migrations
             DropIndex("dbo.SanPham", new[] { "MaNCC" });
             DropIndex("dbo.BinhLuan", new[] { "MaSP" });
             DropIndex("dbo.BinhLuan", new[] { "MaTV" });
+            DropTable("dbo.Quyen");
+            DropTable("dbo.LoaiThanhVien_Quyen");
             DropTable("dbo.PhieuNhap");
             DropTable("dbo.ChiTietPhieuNhap");
             DropTable("dbo.KhachHang");

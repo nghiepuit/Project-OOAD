@@ -33,6 +33,15 @@ namespace QuanLyLinhKienMayTinh.Entities
         [DisplayName("Hình Ảnh")]
         public string HinhAnh { get; set; }
 
+        [DisplayName("Hình Ảnh 1")]
+        public string HinhAnh1 { get; set; }
+
+        [DisplayName("Hình Ảnh 2")]
+        public string HinhAnh2 { get; set; }
+
+        [DisplayName("Hình Ảnh 3")]
+        public string HinhAnh3 { get; set; }
+
         [Required]
         [DisplayName("Số Lượng Tồn")]
         public int SoLuongTon { get; set; }

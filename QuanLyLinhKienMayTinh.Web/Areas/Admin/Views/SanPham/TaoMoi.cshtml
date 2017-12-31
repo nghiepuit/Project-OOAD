@@ -1,0 +1,360 @@
+﻿@model QuanLyLinhKienMayTinh.Entities.SanPham
+@{
+    ViewBag.Title = "Thêm Mới Sản Phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-danger text-center">Thêm Mới Sản Phẩm</h2>
+
+@if (ViewBag.Message != null)
+{
+    <div class="col-md-12" style="margin: 30px 0; padding: 0 !important;">
+        <h1 class="alert alert-success">@ViewBag.Message</h1>
+    </div>
+}
+
+@if (ViewBag.upload != null)
+{
+    <div class="col-md-12" style="margin: 30px 0; padding: 0 !important;">
+        <h1 class="alert alert-success">@ViewBag.upload</h1>
+    </div>
+}
+
+@using (Html.BeginForm("TaoMoi", "SanPham", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ten, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Ten, new { htmlAttributes = new { @class = "form-control" } })
+                <span id="tbTenSP" class="label label-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DonGia, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DonGia, new { htmlAttributes = new { @class = "form-control" } })
+                <span id="tbDonGia" class="label label-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CauHinh, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 md-form">
+                <textarea class="md-textarea" cols="100" rows="10" id="CauHinh" name="CauHinh"></textarea>
+                <span id="tbCauHinh" class="label label-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MoTa, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <textarea class="mota" rows="10" id="MoTa" name="MoTa"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NhaCungCap.Ten, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.DropDownList("MaNCC", null, new { @class = "mdb-select" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NhaSanXuat.Ten, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.DropDownList("MaNSX", null, new { @class = "mdb-select" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LoaiSanPham.Ten, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.DropDownList("MaLSP", null, new { @class = "mdb-select" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HinhAnh, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="file-field">
+                    <div class="btn btn-primary btn-sm">
+                        <span>Chọn hình</span>
+                        <input type="file" name="HinhAnh" id="HinhAnh">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="Vui lòng chọn hình ảnh">
+                    </div>
+                </div>
+                <span id="tbHinhAnh" class="label label-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HinhAnh1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="file-field">
+                    <div class="btn btn-primary btn-sm">
+                        <span>Chọn hình</span>
+                        <input type="file" name="HinhAnh" id="HinhAnh1">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="Vui lòng chọn hình ảnh">
+                    </div>
+                </div>
+                <span id="tbHinhAnh1" class="label label-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HinhAnh2, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="file-field">
+                    <div class="btn btn-primary btn-sm">
+                        <span>Chọn hình</span>
+                        <input type="file" name="HinhAnh" id="HinhAnh2">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="Vui lòng chọn hình ảnh">
+                    </div>
+                </div>
+                <span id="tbHinhAnh2" class="label label-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HinhAnh3, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="file-field">
+                    <div class="btn btn-primary btn-sm">
+                        <span>Chọn hình</span>
+                        <input type="file" name="HinhAnh" id="HinhAnh3">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="Vui lòng chọn hình ảnh">
+                    </div>
+                </div>
+                <span id="tbHinhAnh3" class="label label-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-offset-2 col-md-10">
+            <a href="/Admin/SanPham/" class="btn btn-primary">
+                <i class="fa fa-arrow-left"></i>
+                Quay Lại
+            </a>
+            <button class="btn btn-success" type="submit" id="btnThem">
+                <i class="fa fa-save"></i>
+                Lưu Lại
+            </button>
+        </div>
+    </div>
+}
+
+@section ClientScripts
+{
+
+    <script src="~/Assets/js/tinymce/js/tinymce/tinymce.min.js"></script>
+    <script type="text/javascript">
+        tinymce.init({
+            selector: ".mota",
+            plugins: [
+                "advlist autolink lists link image charmap print preview anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime media table contextmenu paste"
+            ],
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+        });
+    </script>
+
+    <script>
+        $(document)
+            .ready(function () {
+                $('#btnThem')
+                    .click(function () {
+                        var loi = 0;
+                        if ($('#TenSP').val() == "") {
+                            $('#tbTenSP').text("Tên sản phẩm không được bỏ trống");
+                            loi++;
+                        }
+                        else {
+                            $('#tbTenSP').text("");
+                        }
+                        if ($('#DonGia').val() == "") {
+                            $('#tbDonGia').text("Đơn giá không được bỏ trống");
+                            loi++;
+                        }
+                        else {
+                            $('#tbDonGia').text("");
+                        }
+                        if ($('#DonGia').val() == "") {
+                            $('#tbDonGia').text("Đơn giá không được bỏ trống");
+                            loi++;
+                        }
+                        else {
+                            $('#tbDonGia').text("");
+                        }
+                        if ($('#CauHinh').val() == "") {
+                            $('#tbCauHinh').text("Cấu hình không được bỏ trống");
+                            loi++;
+                        }
+                        else {
+                            $('#tbCauHinh').text("");
+                        }
+
+                        if ($('#HinhAnh').val() == "") {
+                            $('#tbHinhAnh').text("Vui lòng chọn hình ảnh");
+                            loi++;
+                        }
+                        else {
+                            $('#tbHinhAnh').text("");
+                        }
+                        if ($('#HinhAnh1').val() == "") {
+                            $('#tbHinhAnh1').text("Vui lòng chọn hình ảnh");
+                            loi++;
+                        }
+                        else {
+                            $('#tbHinhAnh1').text("");
+                        }
+                        if ($('#HinhAnh2').val() == "") {
+                            $('#tbHinhAnh2').text("Vui lòng chọn hình ảnh");
+                            loi++;
+                        }
+                        else {
+                            $('#tbHinhAnh2').text("");
+                        }
+                        if ($('#HinhAnh3').val() == "") {
+                            $('#tbHinhAnh3').text("Vui lòng chọn hình ảnh");
+                            loi++;
+                        }
+                        else {
+                            $('#tbHinhAnh3').text("");
+                        }
+
+                        if (loi != 0) {
+                            return false;
+                        }
+                    });
+
+                // Sự kiện khi chọn file hình ảnh
+                $("#HinhAnh").change(function () {
+
+                    var val = $(this).val();
+
+                    switch (val.substring(val.lastIndexOf('.') + 1).toLowerCase()) {
+                        case 'gif': case 'jpg': case 'png':
+                            $('#tbHinhAnh').text("");
+                            break;
+                        default:
+                            $(this).val('');
+                            $('#tbHinhAnh').text("Hình ảnh không hợp lệ");
+                            return false;
+                    }
+                });
+                $("#HinhAnh1").change(function () {
+
+                    var val = $(this).val();
+
+                    switch (val.substring(val.lastIndexOf('.') + 1).toLowerCase()) {
+                        case 'gif': case 'jpg': case 'png':
+                            $('#tbHinhAnh1').text("");
+                            break;
+                        default:
+                            $(this).val('');
+                            $('#tbHinhAnh1').text("Hình ảnh không hợp lệ");
+                            return false;
+                    }
+                });
+                $("#HinhAnh2").change(function () {
+
+                    var val = $(this).val();
+
+                    switch (val.substring(val.lastIndexOf('.') + 1).toLowerCase()) {
+                        case 'gif': case 'jpg': case 'png':
+                            $('#tbHinhAnh2').text("");
+                            break;
+                        default:
+                            $(this).val('');
+                            $('#tbHinhAnh2').text("Hình ảnh không hợp lệ");
+                            return false;
+                    }
+                });
+
+                $("#HinhAnh3").change(function () {
+
+                    var val = $(this).val();
+
+                    switch (val.substring(val.lastIndexOf('.') + 1).toLowerCase()) {
+                        case 'gif': case 'jpg': case 'png':
+                            $('#tbHinhAnh3').text("");
+                            break;
+                        default:
+                            $(this).val('');
+                            $('#tbHinhAnh3').text("Hình ảnh không hợp lệ");
+                            return false;
+                    }
+                });
+
+                // Sự kiện khi thay đổi ký tự trong các trường dữ liệu
+                jQuery('#TenSP').on('input propertychange paste', function () {
+                    if ($("#TenSP").val() != "") {
+                        $('#tbTenSP').text("");
+                    } else {
+                        $('#tbTenSP').text("Cấu hình không được bỏ trống");
+                        return false;
+                    }
+                });
+
+                jQuery('#CauHinh').on('input propertychange paste', function () {
+                    if ($("#CauHinh").val() != "") {
+                        $('#tbCauHinh').text("");
+                    } else {
+                        $('#tbCauHinh').text("Cấu hình không được bỏ trống");
+                        return false;
+                    }
+                });
+
+                jQuery('#Moi').on('change', function () {
+                    if ($("#Moi").val() != "") {
+                        $('#tbMoi').text("");
+                    } else {
+                        $('#tbMoi').text("Vui lòng chọn giá trị");
+                        return false;
+                    }
+                });
+                jQuery('#DaXoa').on('change', function () {
+                    if ($("#DaXoa").val() != "") {
+                        $('#tbDaXoa').text("");
+                    } else {
+                        $('#tbDaXoa').text("Vui lòng chọn giá trị");
+                        return false;
+                    }
+                });
+                jQuery('#CauHinh').on('input propertychange paste', function () {
+                    if ($("#CauHinh").val() != "") {
+                        $('#tbCauHinh').text("");
+                    } else {
+                        $('#tbCauHinh').text("Cấu hình không được bỏ trống");
+                        return false;
+                    }
+                });
+
+                // kiểm tra kiểu và giá trị của đơn giá
+                $('#DonGia')
+                    .keyup(function () {
+                        var DonGia = $("#DonGia").val();
+                        if (isNaN(DonGia) === true || DonGia < 0 || DonGia == "") {
+                            $('#tbDonGia').text("Đơn giá nhập vào không hợp lệ");
+                            return false;
+                        } else {
+                            $('#tbDonGia').text("");
+                        }
+                    });
+            });
+    </script>
+}

@@ -56,6 +56,12 @@ namespace QuanLyLinhKienMayTinh.Data.Infrastructure
             return dbSet.Remove(entity);
         }
 
+        public virtual T DeleteByIdString(string id)
+        {
+            var entity = dbSet.Find(id);
+            return dbSet.Remove(entity);
+        }
+
         public virtual void DeleteMulti(Expression<Func<T, bool>> where)
         {
             IEnumerable<T> objects = dbSet.Where<T>(where).AsEnumerable();
@@ -144,6 +150,12 @@ namespace QuanLyLinhKienMayTinh.Data.Infrastructure
         public bool CheckContains(Expression<Func<T, bool>> predicate)
         {
             return dataContext.Set<T>().Count<T>(predicate) > 0;
+        }
+
+        public void DeleteMulti(IEnumerable<T> list)
+        {
+            foreach (T obj in list)
+                dbSet.Remove(obj);
         }
 
         #endregion Implementation

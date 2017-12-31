@@ -1,6 +1,5 @@
 ﻿using QuanLyLinhKienMayTinh.Entities;
 using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace QuanLyLinhKienMayTinh.Data
 {
@@ -24,10 +23,11 @@ namespace QuanLyLinhKienMayTinh.Data
         public DbSet<PhieuNhap> PhieuNhap { get; set; }
         public DbSet<SanPham> SanPham { get; set; }
         public DbSet<ThanhVien> ThanhVien { get; set; }
+        public DbSet<Quyen> Quyen { get; set; }
+        public DbSet<LoaiThanhVien_Quyen> LoaiThanhVien_Quyen { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            
         }
     }
 }

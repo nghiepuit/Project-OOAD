@@ -54,9 +54,11 @@
     <Compile Include="Models\KhachHang.cs" />
     <Compile Include="Models\LoaiSanPham.cs" />
     <Compile Include="Models\LoaiThanhVien.cs" />
+    <Compile Include="Models\LoaiThanhVien_Quyen.cs" />
     <Compile Include="Models\NhaCungCap.cs" />
     <Compile Include="Models\NhaSanXuat.cs" />
     <Compile Include="Models\PhieuNhap.cs" />
+    <Compile Include="Models\Quyen.cs" />
     <Compile Include="Models\SanPham.cs" />
     <Compile Include="Models\ThanhVien.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

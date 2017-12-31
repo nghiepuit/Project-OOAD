@@ -11,12 +11,16 @@ namespace QuanLyLinhKienMayTinh.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MaLTV { get; set; }
+
         [Required]
         [DisplayName("Loại Thành Viên")]
         public string Ten { get; set; }
+
         [DisplayName("Khuyến Mãi")]
         [DefaultValue(0)]
         public int KhuyenMai { get; set; }
+
         public virtual IEnumerable<ThanhVien> DanhSachThanhVien { get; set; }
+        public virtual IEnumerable<LoaiThanhVien_Quyen> DanhSachLoaiThanhVien_Quyen { get; set; }
     }
 }
