@@ -58,9 +58,14 @@
     <Compile Include="Migrations\201712301840413_Initial.Designer.cs">
       <DependentUpon>201712301840413_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801011653475_ThongKeDoanhThuLoiNhuan.cs" />
+    <Compile Include="Migrations\201801011653475_ThongKeDoanhThuLoiNhuan.Designer.cs">
+      <DependentUpon>201801011653475_ThongKeDoanhThuLoiNhuan.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuanLyLinhKienMayTinhDbContext.cs" />
+    <Compile Include="Repositories\DonDatHangRepository.cs" />
     <Compile Include="Repositories\QuyenRepository.cs" />
     <Compile Include="Repositories\LoaiThanhVien_QuyenRepository.cs" />
     <Compile Include="Repositories\LoaiThanhVienRepository.cs" />
@@ -90,6 +95,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201712301840413_Initial.resx">
       <DependentUpon>201712301840413_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801011653475_ThongKeDoanhThuLoiNhuan.resx">
+      <DependentUpon>201801011653475_ThongKeDoanhThuLoiNhuan.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

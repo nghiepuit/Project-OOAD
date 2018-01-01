@@ -43,6 +43,7 @@
     <Compile Include="PasswordHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UploadHelper.cs" />
+    <Compile Include="ViewModels\ThongKeDoanhThuLoiNhuan.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

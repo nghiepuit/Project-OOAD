@@ -1,6 +1,20 @@
-﻿@{
+﻿@using QuanLyLinhKienMayTinh.Common.ViewModels
+@model IEnumerable<ThongKeDoanhThuLoiNhuan>
+@{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+    string TuNgay = Request["TuNgay"];
+    string DenNgay = Request["DenNgay"];
+    DateTime rs;
+    if (!DateTime.TryParse(TuNgay, out rs))
+    {
+        TuNgay = "";
+    }
+    if (!DateTime.TryParse(DenNgay, out rs))
+    {
+        DenNgay = "";
+    }
 }
 
 <style>
@@ -10,20 +24,21 @@
         margin-top: -20px;
     }
 
-    .cascading-admin-card .admin-up .fa {
-        padding: 1.7rem;
-        font-size: 2rem;
-        color: #fff;
-        text-align: left;
-        border-radius: 3px;
-        -webkit-box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
-        box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
-    }
-    .cascading-admin-card .admin-up .data {
-        float: right;
-        margin-top: 2rem;
-        text-align: right;
-    }
+        .cascading-admin-card .admin-up .fa {
+            padding: 1.7rem;
+            font-size: 2rem;
+            color: #fff;
+            text-align: left;
+            border-radius: 3px;
+            -webkit-box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
+            box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
+        }
+
+        .cascading-admin-card .admin-up .data {
+            float: right;
+            margin-top: 2rem;
+            text-align: right;
+        }
 </style>
 
 <section class="mt-lg-5">
@@ -95,9 +110,9 @@
                 <div class="admin-up">
                     <i class="fa fa-money light-blue lighten-1"></i>
                     <div class="data">
-                        <h3 class="font-bold dark-grey-text">
-                            @ViewBag.TongDoanhThu
-                        </h3>
+                        <h5 class="font-bold dark-grey-text">
+                            @ViewBag.TongDoanhThu.ToString("N0") đ
+                        </h5>
                     </div>
                 </div>
                 <!--/.Card Data-->
@@ -144,3 +159,83 @@
     </div>
     <!--Grid row-->
 </section>
+
+@using (Html.BeginForm("", "ThongKe", FormMethod.Get))
+{
+    <div class="row">
+        <div class="col-lg-3 col-md-12">
+            <div class="md-form">
+                <input name="TuNgay" value="@TuNgay" type="text" class="form-control datepicker" placeholder="Từ ngày:">
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-12">
+            <div class="md-form">
+                <input name="DenNgay" value="@DenNgay" type="text" class="form-control datepicker" placeholder="Đến ngày:">
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-12">
+            <div class="md-form">
+                <button class="btn btn-primary"><i class="fa fa-search"></i>  </button>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-12 text-center">
+        <table class="table table-bordered">
+            <tr>
+                <th>Ngày</th>
+                <th>Doanh Thu</th>
+                <th>Lợi Nhuận</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Ngay.ToString("dd/MM/yyyy")</td>
+                    <td>@item.DoanhThu.ToString("N0") đ</td>
+                    <td>@item.LoiNhuan.ToString("N0") đ</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+<canvas id="lineChart"></canvas>
+@section ClientScripts{
+    <script>
+        //line
+        var ctxL = document.getElementById("lineChart").getContext('2d');
+        var myLineChart = new Chart(ctxL, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [
+                    {
+                        label: "My First dataset",
+                        fillColor: "rgba(220,220,220,0.2)",
+                        strokeColor: "rgba(220,220,220,1)",
+                        pointColor: "rgba(220,220,220,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(220,220,220,1)",
+                        data: [65, 59, 80, 81, 56, 55, 40]
+                    },
+                    {
+                        label: "My Second dataset",
+                        fillColor: "rgba(151,187,205,0.2)",
+                        strokeColor: "rgba(151,187,205,1)",
+                        pointColor: "rgba(151,187,205,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(151,187,205,1)",
+                        data: [28, 48, 40, 19, 86, 27, 90]
+                    }
+                ]
+            },
+            options: {
+                responsive: true
+            }
+        });
+    </script>
+}

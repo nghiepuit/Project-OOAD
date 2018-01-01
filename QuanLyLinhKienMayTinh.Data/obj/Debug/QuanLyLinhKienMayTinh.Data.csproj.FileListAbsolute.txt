@@ -15,3 +15,4 @@ C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Data
 C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Data\bin\Debug\QuanLyLinhKienMayTinh.Model.dll.config
 C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Data\obj\Debug\QuanLyLinhKienMayTinh.Data.Migrations.Initial.resources
 C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Data\obj\Debug\QuanLyLinhKienMayTinh.Data.csproj.GenerateResource.Cache
+C:\Users\nghiepuit\Desktop\ooad\QuanLyLinhKienMayTinh\QuanLyLinhKienMayTinh.Data\obj\Debug\QuanLyLinhKienMayTinh.Data.Migrations.ThongKeDoanhThuLoiNhuan.resources
