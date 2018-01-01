@@ -8,7 +8,6 @@ using System.Web.Mvc;
 
 namespace QuanLyLinhKienMayTinh.Web.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "QuanTri,QuanLyPhieuNhap")]
     public class PhieuNhapController : Controller
     {
         private INhaCungCapService _nccService;

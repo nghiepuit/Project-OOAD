@@ -10,6 +10,8 @@ namespace QuanLyLinhKienMayTinh.Data.Infrastructure
 
         void Update(T entity);
 
+        void UpdateNotModified(T entity);
+
         T Delete(T entity);
 
         T Delete(int id);

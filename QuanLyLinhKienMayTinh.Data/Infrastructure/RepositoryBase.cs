@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -43,6 +44,11 @@ namespace QuanLyLinhKienMayTinh.Data.Infrastructure
         {
             dbSet.Attach(entity);
             dataContext.Entry(entity).State = EntityState.Modified;
+        }
+
+        public virtual void UpdateNotModified(T entity)
+        {
+            dbSet.AddOrUpdate(entity);
         }
 
         public virtual T Delete(T entity)

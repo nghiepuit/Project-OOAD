@@ -1,7 +1,7 @@
 ﻿@{
     Layout = null;
 }
-
+@using QuanLyLinhKienMayTinh.Entities;
 <!DOCTYPE html>
 
 <html>
@@ -39,14 +39,17 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle waves-effect" href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-user"></i>
-                        <span class="clearfix d-none d-sm-inline-block">
-                            Thông Tin Đăng Nhập
-                        </span>
+                        @if (Session["TaiKhoan"] != null)
+                        {
+                            ThanhVien tv = (ThanhVien)Session["TaiKhoan"];
+                            <span class="clearfix d-none d-sm-inline-block">
+                                Xin chào @tv.HoTen
+                            </span>
+                        }
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item waves-effect waves-light" href="#">Đăng Xuất</a>
-                        <a class="dropdown-item waves-effect waves-light" href="#">Tài Khoản</a>
+                        <a class="dropdown-item waves-effect waves-light" href="/Home/DangXuat">Đăng Xuất</a>
                     </div>
                 </li>
             </ul>
@@ -58,7 +61,7 @@
     </header>
 
     <main>
-        <div class="container-fluid" style="min-height: 1000px;">
+        <div class="container-fluid" style="min-height: 1100px;">
             @RenderBody()
         </div>
     </main>

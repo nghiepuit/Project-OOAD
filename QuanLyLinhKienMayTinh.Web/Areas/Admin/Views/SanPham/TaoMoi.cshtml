@@ -31,7 +31,7 @@
             @Html.LabelFor(model => model.Ten, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Ten, new { htmlAttributes = new { @class = "form-control" } })
-                <span id="tbTenSP" class="label label-danger"></span>
+                <span id="tbTenSP" class="badge red"></span>
             </div>
         </div>
 
@@ -39,7 +39,7 @@
             @Html.LabelFor(model => model.DonGia, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.DonGia, new { htmlAttributes = new { @class = "form-control" } })
-                <span id="tbDonGia" class="label label-danger"></span>
+                <span id="tbDonGia" class="badge red"></span>
             </div>
         </div>
 
@@ -47,7 +47,7 @@
             @Html.LabelFor(model => model.CauHinh, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10 md-form">
                 <textarea class="md-textarea" cols="100" rows="10" id="CauHinh" name="CauHinh"></textarea>
-                <span id="tbCauHinh" class="label label-danger"></span>
+                <span id="tbCauHinh" class="badge red"></span>
             </div>
         </div>
 
@@ -91,7 +91,7 @@
                         <input class="file-path validate" type="text" placeholder="Vui lòng chọn hình ảnh">
                     </div>
                 </div>
-                <span id="tbHinhAnh" class="label label-danger"></span>
+                <span id="tbHinhAnh" class="badge red"></span>
             </div>
         </div>
 
@@ -107,7 +107,7 @@
                         <input class="file-path validate" type="text" placeholder="Vui lòng chọn hình ảnh">
                     </div>
                 </div>
-                <span id="tbHinhAnh1" class="label label-danger"></span>
+                <span id="tbHinhAnh1" class="badge red"></span>
             </div>
         </div>
 
@@ -123,7 +123,7 @@
                         <input class="file-path validate" type="text" placeholder="Vui lòng chọn hình ảnh">
                     </div>
                 </div>
-                <span id="tbHinhAnh2" class="label label-danger"></span>
+                <span id="tbHinhAnh2" class="badge red"></span>
             </div>
         </div>
 
@@ -139,7 +139,14 @@
                         <input class="file-path validate" type="text" placeholder="Vui lòng chọn hình ảnh">
                     </div>
                 </div>
-                <span id="tbHinhAnh3" class="label label-danger"></span>
+                <span id="tbHinhAnh3" class="badge red"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10" style="margin-left: 5px;">
+                <input type="checkbox" class="filled-in" id="Moi" name="Moi" value="true">
+                <label for="Moi">Sản Phẩm Mới</label>
             </div>
         </div>
 
@@ -178,7 +185,7 @@
                 $('#btnThem')
                     .click(function () {
                         var loi = 0;
-                        if ($('#TenSP').val() == "") {
+                        if ($('#Ten').val() == "") {
                             $('#tbTenSP').text("Tên sản phẩm không được bỏ trống");
                             loi++;
                         }
@@ -213,27 +220,6 @@
                         }
                         else {
                             $('#tbHinhAnh').text("");
-                        }
-                        if ($('#HinhAnh1').val() == "") {
-                            $('#tbHinhAnh1').text("Vui lòng chọn hình ảnh");
-                            loi++;
-                        }
-                        else {
-                            $('#tbHinhAnh1').text("");
-                        }
-                        if ($('#HinhAnh2').val() == "") {
-                            $('#tbHinhAnh2').text("Vui lòng chọn hình ảnh");
-                            loi++;
-                        }
-                        else {
-                            $('#tbHinhAnh2').text("");
-                        }
-                        if ($('#HinhAnh3').val() == "") {
-                            $('#tbHinhAnh3').text("Vui lòng chọn hình ảnh");
-                            loi++;
-                        }
-                        else {
-                            $('#tbHinhAnh3').text("");
                         }
 
                         if (loi != 0) {

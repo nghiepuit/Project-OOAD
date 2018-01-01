@@ -3,6 +3,7 @@ using QuanLyLinhKienMayTinh.Data.Repositories;
 using QuanLyLinhKienMayTinh.Entities;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace QuanLyLinhKienMayTinh.Service
 {
@@ -23,6 +24,8 @@ namespace QuanLyLinhKienMayTinh.Service
         void luu();
 
         // Custom
+        IEnumerable<SanPham> LayTatCaPhanTrang(int page, int pageSize, out int totalRow, int LoaiSanPham = -1, string TuNgay = "", string DenNgay = "", string TuKhoa = "");
+
         IEnumerable<SanPham> LaySanPhamSapHetHang(int SoLuongTon);
 
         IEnumerable<SanPham> LayDienThoaiMoiNhat(int limit);
@@ -55,7 +58,7 @@ namespace QuanLyLinhKienMayTinh.Service
 
         public void CapNhat(SanPham item)
         {
-            _sanPhamRepository.Update(item);
+            _sanPhamRepository.UpdateNotModified(item);
         }
 
         public void Xoa(int Ma)
@@ -136,6 +139,32 @@ namespace QuanLyLinhKienMayTinh.Service
                     break;
             }
 
+            totalRow = query.Count();
+            return query.Skip((page - 1) * pageSize).Take(pageSize);
+        }
+
+        public IEnumerable<SanPham> LayTatCaPhanTrang(int page, int pageSize, out int totalRow, 
+            int LoaiSanPham = -1, string TuNgay = "", string DenNgay = "", string TuKhoa = "")
+        {
+            var query = _sanPhamRepository.GetMulti(x => x.DaXoa == false);
+            if(LoaiSanPham != -1)
+            {
+                query = query.Where(x => x.MaLSP == LoaiSanPham);
+            }
+            if(TuNgay != "")
+            {
+                DateTime dtTuNgay = Convert.ToDateTime(TuNgay);
+                query = query.Where(x => Convert.ToDateTime(x.NgayCapNhat.ToString("dd/MM/yyyy")) >= dtTuNgay);
+            }
+            if (DenNgay != "")
+            {
+                DateTime dtDenNgay = Convert.ToDateTime(DenNgay);
+                query = query.Where(x => Convert.ToDateTime(x.NgayCapNhat.ToString("dd/MM/yyyy")) <= dtDenNgay);
+            }
+            if(TuKhoa != "")
+            {
+                query = query.Where(x => x.Ten.Contains(TuKhoa));
+            }
             totalRow = query.Count();
             return query.Skip((page - 1) * pageSize).Take(pageSize);
         }

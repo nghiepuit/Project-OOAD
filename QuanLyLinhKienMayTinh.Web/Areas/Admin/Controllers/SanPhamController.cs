@@ -1,4 +1,5 @@
-﻿using QuanLyLinhKienMayTinh.Entities;
+﻿using QuanLyLinhKienMayTinh.Common;
+using QuanLyLinhKienMayTinh.Entities;
 using QuanLyLinhKienMayTinh.Service;
 using QuanLyLinhKienMayTinh.Web.Infrastructure.Core;
 using System;
@@ -29,11 +30,42 @@ namespace QuanLyLinhKienMayTinh.Web.Areas.Admin.Controllers
             this._spService = spService;
         }
 
+        [HttpGet]
         public ActionResult Index(int page = 1)
         {
+            ViewBag.listLoaiSanPham = _lspService.LayTatCa();
             int pageSize = 10;
             int totalRow = 0;
             var list = _spService.LayTatCaPhanTrang(page, pageSize, out totalRow);
+            int totalPage = (int)Math.Ceiling((double)totalRow / pageSize);
+            var paginationSet = new PaginationSet<SanPham>()
+            {
+                Items = list,
+                MaxPage = 5,
+                PageIndex = page,
+                TotalCount = totalRow,
+                TotalPages = totalPage,
+                Count = list.Count()
+            };
+
+            return View("Index", paginationSet);
+        }
+
+        [HttpPost]
+        public ActionResult Index(FormCollection frmTimKiem, int page = 1)
+        {
+            ViewBag.listLoaiSanPham = _lspService.LayTatCa();
+            int LoaiSanPham = -1;
+            if (frmTimKiem["LoaiSanPham"] != null)
+                LoaiSanPham = int.Parse(frmTimKiem["LoaiSanPham"].ToString());
+            string TuNgay = frmTimKiem["TuNgay"].ToString();
+            string DenNgay = frmTimKiem["DenNgay"].ToString();
+            string TuKhoa = frmTimKiem["TuKhoa"].ToString();
+
+            int pageSize = 10;
+            int totalRow = 0;
+            var list = _spService.LayTatCaPhanTrang(page, pageSize, out totalRow,
+                LoaiSanPham, TuNgay, DenNgay, TuKhoa);
             int totalPage = (int)Math.Ceiling((double)totalRow / pageSize);
             var paginationSet = new PaginationSet<SanPham>()
             {
@@ -71,10 +103,8 @@ namespace QuanLyLinhKienMayTinh.Web.Areas.Admin.Controllers
             {
                 if (HinhAnh[i] != null)
                 {
-                    //Kiểm tra nội dung hình ảnh
                     if (HinhAnh[i].ContentLength > 0)
                     {
-                        //Kiểm tra định dạng hình ảnh
                         if (HinhAnh[i].ContentType != "image/jpeg" && HinhAnh[i].ContentType != "image/png" && HinhAnh[i].ContentType != "image/gif" && HinhAnh[i].ContentType != "image/jpg")
                         {
                             ViewBag.upload += "Hình ảnh" + i + " không hợp lệ <br />";
@@ -82,13 +112,8 @@ namespace QuanLyLinhKienMayTinh.Web.Areas.Admin.Controllers
                         }
                         else
                         {
-                            //Kiểm tra hình ảnh tồn tại
-
-                            //Lấy tên hình ảnh
                             var fileName = Path.GetFileName(HinhAnh[0].FileName);
-                            //Lấy hình ảnh chuyển vào thư mục hình ảnh
                             var path = Path.Combine(Server.MapPath("~/Assets/images/SanPham"), fileName);
-                            //Nếu thư mục chứa hình ảnh đó rồi thì xuất ra thông báo
                             if (System.IO.File.Exists(path))
                             {
                                 ViewBag.upload = "Hình " + i + "đã tồn tại <br />";
@@ -102,29 +127,49 @@ namespace QuanLyLinhKienMayTinh.Web.Areas.Admin.Controllers
             {
                 return View(sp);
             }
-            sp.HinhAnh = HinhAnh[0].FileName;
-            sp.HinhAnh1 = HinhAnh[1].FileName;
-            sp.HinhAnh2 = HinhAnh[2].FileName;
-            sp.HinhAnh3 = HinhAnh[3].FileName;
 
-            for (int i = 0; i < HinhAnh.Count(); i++)
+            if (HinhAnh[0] != null)
+                sp.HinhAnh = UploadHelper.RenameImage(Path.GetExtension(HinhAnh[0].FileName));
+            if (HinhAnh[1] != null)
+                sp.HinhAnh1 = UploadHelper.RenameImage(Path.GetExtension(HinhAnh[1].FileName));
+            if (HinhAnh[2] != null)
+                sp.HinhAnh2 = UploadHelper.RenameImage(Path.GetExtension(HinhAnh[2].FileName));
+            if (HinhAnh[3] != null)
+                sp.HinhAnh3 = UploadHelper.RenameImage(Path.GetExtension(HinhAnh[3].FileName));
+
+            if (HinhAnh[0] != null && HinhAnh[0].ContentLength > 0)
             {
-                if (HinhAnh[i].ContentLength > 0)
-                {
-                    //Lấy tên hình ảnh
-                    var fileName = Path.GetFileName(HinhAnh[i].FileName);
-                    //Lấy hình ảnh chuyển vào thư mục hình ảnh
-                    var path = Path.Combine(Server.MapPath("~/Assets/images/SanPham"), fileName);
-                    HinhAnh[i].SaveAs(path);
-                }
+                var fileName = Path.GetFileName(sp.HinhAnh);
+                var path = Path.Combine(Server.MapPath("~/Assets/images/SanPham"), fileName);
+                HinhAnh[0].SaveAs(path);
             }
+
+            if (HinhAnh[1] != null && HinhAnh[1].ContentLength > 0)
+            {
+                var fileName1 = Path.GetFileName(sp.HinhAnh1);
+                var path = Path.Combine(Server.MapPath("~/Assets/images/SanPham"), fileName1);
+                HinhAnh[1].SaveAs(path);
+            }
+
+            if (HinhAnh[2] != null && HinhAnh[2].ContentLength > 0)
+            {
+                var fileName2 = Path.GetFileName(sp.HinhAnh2);
+                var path = Path.Combine(Server.MapPath("~/Assets/images/SanPham"), fileName2);
+                HinhAnh[2].SaveAs(path);
+            }
+
+            if (HinhAnh[3] != null && HinhAnh[3].ContentLength > 0)
+            {
+                var fileName3 = Path.GetFileName(sp.HinhAnh3);
+                var path = Path.Combine(Server.MapPath("~/Assets/images/SanPham"), fileName3);
+                HinhAnh[3].SaveAs(path);
+            }
+
             sp.SoLuongTon = 0;
-            if(sp.NgayCapNhat == null)
-            {
-                sp.NgayCapNhat = DateTime.Now;
-            }
+            sp.NgayCapNhat = DateTime.Now;
             _spService.ThemMoi(sp);
             _spService.luu();
+            TempData["Message"] = "Thêm thành công!";
             return RedirectToAction("Index");
         }
 
@@ -137,45 +182,84 @@ namespace QuanLyLinhKienMayTinh.Web.Areas.Admin.Controllers
                 return HttpNotFound();
             }
 
-            ViewBag.ListNhaCungCap = new SelectList(_nccService.LayTatCa(), "MaNCC", "Ten");
-            ViewBag.ListLoaiSanPham = new SelectList(_lspService.LayTatCa(), "MaLSP", "Ten");
-            ViewBag.ListNhaSanXuat = new SelectList(_nsxService.LayTatCa(), "MaNSX", "Ten");
+            ViewBag.MaNCC = new SelectList(_nccService.LayTatCa(), "MaNCC", "Ten");
+            ViewBag.MaLSP = new SelectList(_lspService.LayTatCa(), "MaLSP", "Ten");
+            ViewBag.MaNSX = new SelectList(_nsxService.LayTatCa(), "MaNSX", "Ten");
             return View(sp);
         }
 
         [ValidateInput(false)]
         [HttpPost]
-        public ActionResult ChinhSua(SanPham sp, HttpPostedFileBase[] HinhAnh)
+        public ActionResult ChinhSua(int id, SanPham sp, HttpPostedFileBase[] HinhAnh)
         {
-            ViewBag.ListNhaCungCap = new SelectList(_nccService.LayTatCa(), "MaNCC", "Ten");
-            ViewBag.ListLoaiSanPham = new SelectList(_lspService.LayTatCa(), "MaLSP", "Ten");
-            ViewBag.ListNhaSanXuat = new SelectList(_nsxService.LayTatCa(), "MaNSX", "Ten");
-            SanPham tp = _spService.LayTheoMa(sp.MaSP);
-            // Lưu ảnh
-            for (int i = 0; i < HinhAnh.Count(); i++)
+            ViewBag.MaNCC = new SelectList(_nccService.LayTatCa(), "MaNCC", "Ten");
+            ViewBag.MaLSP = new SelectList(_lspService.LayTatCa(), "MaLSP", "Ten");
+            ViewBag.MaNSX = new SelectList(_nsxService.LayTatCa(), "MaNSX", "Ten");
+            SanPham tp = _spService.LayTheoMa(id);
+
+            var fileName = "";
+            var fileName1 = "";
+            var fileName2 = "";
+            var fileName3 = "";
+            if (HinhAnh[0] != null)
             {
-                if (HinhAnh[i] != null)
+                if (HinhAnh[0].ContentLength > 0)
                 {
-                    //Kiểm tra nội dung hình ảnh
-                    if (HinhAnh[i].ContentLength > 0)
+                    fileName = UploadHelper.RenameImage(Path.GetExtension(HinhAnh[0].FileName));
+                    var path = Path.Combine(Server.MapPath("~/Assets/images/SanPham"), fileName);
+                    if (System.IO.File.Exists(path))
                     {
-                        //Lấy tên hình ảnh
-                        var fileName = Path.GetFileName(HinhAnh[i].FileName);
-                        //Lấy hình ảnh chuyển vào thư mục hình ảnh
-                        var path = Path.Combine(Server.MapPath("~/Content/images/sanpham"), fileName);
-                        //Nếu thư mục chứa hình ảnh đó rồi thì xuất ra thông báo
-                        if (System.IO.File.Exists(path))
-                        {
-                            System.IO.File.Delete(path);
-                        }
-                        HinhAnh[i].SaveAs(path);
+                        System.IO.File.Delete(path);
                     }
+                    HinhAnh[0].SaveAs(path);
+                }
+            }
+
+            if (HinhAnh[1] != null)
+            {
+                if (HinhAnh[1].ContentLength > 0)
+                {
+                    fileName = UploadHelper.RenameImage(Path.GetExtension(HinhAnh[1].FileName));
+                    var path = Path.Combine(Server.MapPath("~/Assets/images/SanPham"), fileName);
+                    if (System.IO.File.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                    }
+                    HinhAnh[1].SaveAs(path);
+                }
+            }
+
+            if (HinhAnh[2] != null)
+            {
+                if (HinhAnh[2].ContentLength > 0)
+                {
+                    fileName = UploadHelper.RenameImage(Path.GetExtension(HinhAnh[2].FileName));
+                    var path = Path.Combine(Server.MapPath("~/Assets/images/SanPham"), fileName);
+                    if (System.IO.File.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                    }
+                    HinhAnh[2].SaveAs(path);
+                }
+            }
+
+            if (HinhAnh[3] != null)
+            {
+                if (HinhAnh[3].ContentLength > 0)
+                {
+                    fileName = UploadHelper.RenameImage(Path.GetExtension(HinhAnh[3].FileName));
+                    var path = Path.Combine(Server.MapPath("~/Assets/images/SanPham"), fileName);
+                    if (System.IO.File.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                    }
+                    HinhAnh[3].SaveAs(path);
                 }
             }
 
             if (HinhAnh[0] != null)
             {
-                sp.HinhAnh = HinhAnh[0].FileName;
+                sp.HinhAnh = fileName;
             }
             else
             {
@@ -183,7 +267,7 @@ namespace QuanLyLinhKienMayTinh.Web.Areas.Admin.Controllers
             }
             if (HinhAnh[1] != null)
             {
-                sp.HinhAnh1 = HinhAnh[1].FileName;
+                sp.HinhAnh1 = fileName1;
             }
             else
             {
@@ -191,7 +275,7 @@ namespace QuanLyLinhKienMayTinh.Web.Areas.Admin.Controllers
             }
             if (HinhAnh[2] != null)
             {
-                sp.HinhAnh2 = HinhAnh[2].FileName;
+                sp.HinhAnh2 = fileName2;
             }
             else
             {
@@ -199,14 +283,16 @@ namespace QuanLyLinhKienMayTinh.Web.Areas.Admin.Controllers
             }
             if (HinhAnh[3] != null)
             {
-                sp.HinhAnh3 = HinhAnh[3].FileName;
+                sp.HinhAnh3 = fileName3;
             }
             else
             {
                 sp.HinhAnh3 = tp.HinhAnh3;
             }
+            sp.NgayCapNhat = DateTime.Now;
             _spService.CapNhat(sp);
             _spService.luu();
+            TempData["Message"] = "Cập nhật thành công!";
             return RedirectToAction("Index");
         }
 
@@ -221,7 +307,7 @@ namespace QuanLyLinhKienMayTinh.Web.Areas.Admin.Controllers
             sp.DaXoa = true;
             _spService.CapNhat(sp);
             _spService.luu();
-            ViewBag.ThongBao = "Xóa thành công";
+            TempData["Message"] = "Xóa thành công";
 
             return RedirectToAction("Index");
         }
