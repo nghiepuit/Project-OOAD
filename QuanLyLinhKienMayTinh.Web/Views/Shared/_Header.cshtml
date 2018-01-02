@@ -1,4 +1,8 @@
 ﻿@using QuanLyLinhKienMayTinh.Entities;
+@using QuanLyLinhKienMayTinh.Web.Models;
+@{
+    decimal total = 0;
+}
 <div class="container">
     <header id="header" data-plugin-options="{'stickyEnabled': false, 'stickyEnableOnBoxed': false, 'stickyEnableOnMobile': false, 'stickyStartAt': 147, 'stickySetTop': '-147px', 'stickyChangeLogo': false}">
         <div class="header-body">
@@ -20,10 +24,10 @@
                             else
                             {
                                 <li>
-                                    @Html.ActionLink("Đăng Ký", "DangKy")
+                                    @Html.ActionLink("Đăng Ký", "DangKy", "TrangChu")
                                 </li>
                                 <li>
-                                    @Html.ActionLink("Đăng Nhập", "DangNhap")
+                                    @Html.ActionLink("Đăng Nhập", "DangNhap", "TrangChu")
                                 </li>
                             }
                         </ul>
@@ -53,62 +57,61 @@
                                     <a href="#" class="cart-dropdown-icon">
                                         <i class="minicart-icon"></i>
                                         <span class="cart-info">
-                                            <span class="cart-qty">2</span>
+                                            @if (Session["GioHang"] != null && ((List<VatPhamTrongGioHang>)Session["GioHang"]).Count() > 0)
+                                            {
+                                                var count = ((List<VatPhamTrongGioHang>)Session["GioHang"]).Count();
+                                                <span class="cart-qty">@count</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="cart-qty">0</span>
+                                            }
                                             <span class="cart-text">item(s)</span>
                                         </span>
                                     </a>
+                                    @if (Session["GioHang"] != null)
+                                    {
+                                        {
+                                            List<VatPhamTrongGioHang> listGioHang = Session["GioHang"] as List<VatPhamTrongGioHang>;
+                                        }
+                                        <div class="cart-dropdownmenu right">
+                                            <div class="dropdownmenu-wrapper">
+                                                <div class="cart-products">
+                                                    @foreach (var item in Session["GioHang"] as List<VatPhamTrongGioHang>)
+                                                    {
+                                                        total += item.SoLuong * item.DonGia;
+                                                        <div class="product product-sm">
+                                                            <a href="#" class="btn-remove" title="Remove Product">
+                                                                <i class="fa fa-times"></i>
+                                                            </a>
+                                                            <figure class="product-image-area">
+                                                                <a href="/SanPham/XemChiTiet/@item.MaSP" title="Product Name" class="product-image">
+                                                                    <img src="~/Assets/images/SanPham/@item.HinhAnh" alt="@item.TenSP">
+                                                                </a>
+                                                            </figure>
+                                                            <div class="product-details-area">
+                                                                <h2 class="product-name"><a href="/SanPham/XemChiTiet/@item.MaSP" title="@item.TenSP">@item.TenSP</a></h2>
 
-                                    <div class="cart-dropdownmenu right">
-                                        <div class="dropdownmenu-wrapper">
-                                            <div class="cart-products">
-                                                <div class="product product-sm">
-                                                    <a href="#" class="btn-remove" title="Remove Product">
-                                                        <i class="fa fa-times"></i>
-                                                    </a>
-                                                    <figure class="product-image-area">
-                                                        <a href="demo-shop-12-product-details.html" title="Product Name" class="product-image">
-                                                            <img src="~/Assets/img//demos/shop/products/thumbs/cart-product1.jpg" alt="Product Name">
-                                                        </a>
-                                                    </figure>
-                                                    <div class="product-details-area">
-                                                        <h2 class="product-name"><a href="demo-shop-12-product-details.html" title="Product Name">Blue Women Top</a></h2>
-
-                                                        <div class="cart-qty-price">
-                                                            1 X
-                                                            <span class="product-price">$65.00</span>
+                                                                <div class="cart-qty-price">
+                                                                    @item.SoLuong X
+                                                                    <span class="product-price">@item.DonGia.ToString("N0") đ</span>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    }
                                                 </div>
-                                                <div class="product product-sm">
-                                                    <a href="#" class="btn-remove" title="Remove Product">
-                                                        <i class="fa fa-times"></i>
-                                                    </a>
-                                                    <figure class="product-image-area">
-                                                        <a href="demo-shop-12-product-details.html" title="Product Name" class="product-image">
-                                                            <img src="~/Assets/img//demos/shop/products/thumbs/cart-product2.jpg" alt="Product Name">
-                                                        </a>
-                                                    </figure>
-                                                    <div class="product-details-area">
-                                                        <h2 class="product-name"><a href="demo-shop-12-product-details.html" title="Product Name">Black Utility Top</a></h2>
 
-                                                        <div class="cart-qty-price">
-                                                            1 X
-                                                            <span class="product-price">$39.00</span>
-                                                        </div>
-                                                    </div>
+                                                <div class="cart-totals">
+                                                    Total: <span>@total.ToString("N0") đ</span>
                                                 </div>
-                                            </div>
 
-                                            <div class="cart-totals">
-                                                Total: <span>$104.00</span>
-                                            </div>
-
-                                            <div class="cart-actions">
-                                                <a href="demo-shop-12-cart.html" class="btn btn-primary">View Cart</a>
-                                                <a href="demo-shop-12-checkout.html" class="btn btn-primary">Checkout</a>
+                                                <div class="cart-actions">
+                                                    <a href="/GioHang/XemGioHang" class="btn btn-primary">Giỏ Hàng</a>
+                                                    <a href="/GioHang/XemGioHang" class="btn btn-primary">Thanh Toán</a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    }
                                 </div>
                             </div>
 
@@ -151,7 +154,7 @@
                             <i class="fa fa-bars"></i>Danh Mục Sản Phẩm
                         </a>
 
-                        @Html.Action("MenuPartial", "Home")
+                        @Html.Action("MenuPartial", "TrangChu")
                     </div>
                 </div>
             </div>

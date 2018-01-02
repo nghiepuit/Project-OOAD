@@ -20,7 +20,7 @@ namespace QuanLyLinhKienMayTinh.Entities
         public string Email { get; set; }
         [DisplayName("Số Điện Thoại")]
         public string DienThoai { get; set; }
-        public int MaTV { get; set; }
+        public int? MaTV { get; set; }
         public virtual IEnumerable<DonDatHang> DanhSachDonDatHang { get; set; }
         [ForeignKey("MaTV")]
         public virtual ThanhVien ThanhVien { get; set; }

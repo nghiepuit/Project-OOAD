@@ -177,12 +177,14 @@
     <Compile Include="Areas\Admin\Controllers\QuyenController.cs" />
     <Compile Include="Areas\Admin\Controllers\SanPhamController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThongKeController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\GioHangController.cs" />
+    <Compile Include="Controllers\TrangchuController.cs" />
     <Compile Include="Controllers\SanPhamController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Core\PaginationSet.cs" />
+    <Compile Include="Models\VatPhamTrongGioHang.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -330,13 +332,12 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\TrangChu\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Assets\images\SanPham\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -431,7 +432,7 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\MenuPartial.cshtml" />
+    <Content Include="Views\TrangChu\MenuPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\SanPham\LaySanPhamTheoDanhMuc.cshtml" />
@@ -446,13 +447,13 @@
     <Content Include="Areas\Admin\Views\ThongKe\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\DangKy.cshtml" />
+    <Content Include="Views\TrangChu\DangKy.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\DangNhap.cshtml" />
+    <Content Include="Views\TrangChu\DangNhap.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\KhongDuQuyenHan.cshtml" />
+    <Content Include="Views\TrangChu\KhongDuQuyenHan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Quyen\Index.cshtml" />
@@ -480,6 +481,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\SanPham\ChinhSua.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SanPham\XemChiTiet.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\GioHang\CapNhatGioHang.cshtml" />
+    <Content Include="Views\GioHang\ThongBao.cshtml" />
+    <Content Include="Views\GioHang\XemGioHang.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

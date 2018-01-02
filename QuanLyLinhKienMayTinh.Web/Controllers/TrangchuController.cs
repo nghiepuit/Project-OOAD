@@ -10,14 +10,14 @@ using System.Web.Security;
 
 namespace QuanLyLinhKienMayTinh.Web.Controllers
 {
-    public class HomeController : Controller
+    public class TrangchuController : Controller
     {
         private ILoaiSanPhamService _loaiSanPhamService;
         private ISanPhamService _sanPhamService;
         private IThanhVienService _tvService;
         private ILoaiThanhVien_QuyenService _ltv_quyenService;
 
-        public HomeController(
+        public TrangchuController(
             ILoaiSanPhamService loaiSanPhamService,
             ISanPhamService sanPhamService,
             IThanhVienService thanhVienService,

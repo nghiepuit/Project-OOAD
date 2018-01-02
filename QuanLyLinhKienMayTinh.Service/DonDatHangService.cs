@@ -2,6 +2,7 @@
 using QuanLyLinhKienMayTinh.Data.Infrastructure;
 using QuanLyLinhKienMayTinh.Data.Repositories;
 using QuanLyLinhKienMayTinh.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 

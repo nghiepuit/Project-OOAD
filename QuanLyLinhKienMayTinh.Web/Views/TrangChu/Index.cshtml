@@ -13,14 +13,10 @@
         <div class="col-md-9 col-md-offset-3">
             <div class="owl-carousel owl-theme" data-plugin-options="{'items':1, 'loop': false}">
                 <div class="home-slide">
-                    <img src="~/Assets/img//demos/shop/slides/shop12/slide1.jpg" alt="Banner">
-                    <div class="home-slide-content">
-                        <span>Now starting at <strong>$99</strong></span>
-                        <a href="#" class="btn btn-default">SHOP NOW <i class="fa fa-caret-right"></i></a>
-                    </div>
+                    <img src="https://laz-img-cdn.alicdn.com/images/ims-web/TB13dq.c7fb_uJkHFrdXXX2IVXa.jpg_1200x1200.jpg" alt="Banner">
                 </div>
                 <div class="home-slide">
-                    <img src="~/Assets/img//demos/shop/slides/shop12/slide2.jpg" alt="Banner">
+                    <img src="https://laz-img-cdn.alicdn.com/images/ims-web/TB13Bncc7fb_uJjSsD4XXaqiFXa.jpg_2200x2200Q100.jpg" alt="Banner">
                 </div>
             </div>
         </div>
@@ -75,9 +71,9 @@
 
                                 <a href="#" class="product-quickview">
                                     <i class="fa fa-share-square-o"></i>
-                                    <span>Quick View</span>
+                                    <span>Xem Nhanh</span>
                                 </a>
-                                <div class="product-label"><span class="new">New</span></div>
+                                <div class="product-label"><span class="new">Mới</span></div>
                             </figure>
                             <div class="product-details-area">
                                 <h2 class="product-name">
@@ -99,9 +95,9 @@
                                     <a href="#" class="addtowishlist" title="Add to Wishlist">
                                         <i class="fa fa-heart"></i>
                                     </a>
-                                    <a href="#" class="addtocart" title="Add to Cart">
+                                    <a href="@Url.Action("ThemVaoGioHang","GioHang", new {MaSP=item.MaSP, strURL=Request.Url.ToString()})" class="addtocart" title="Add to Cart">
                                         <i class="fa fa-shopping-cart"></i>
-                                        <span>Add to Cart</span>
+                                        <span>Mua Ngay</span>
                                     </a>
                                     <a href="#" class="comparelink" title="Add to Compare">
                                         <i class="glyphicon glyphicon-signal"></i>
@@ -148,9 +144,9 @@
 
                     <a href="#" class="product-quickview">
                         <i class="fa fa-share-square-o"></i>
-                        <span>Quick View</span>
+                        <span>Xem Nhanh</span>
                     </a>
-                    <div class="product-label"><span class="new">New</span></div>
+                    <div class="product-label"><span class="new">Mới</span></div>
                 </figure>
                 <div class="product-details-area">
                     <h2 class="product-name"><a href="demo-shop-12-product-details.html" title="@item.Ten">@item.Ten</a></h2>
@@ -168,7 +164,7 @@
                         <a href="#" class="addtowishlist" title="Add to Wishlist">
                             <i class="fa fa-heart"></i>
                         </a>
-                        <a href="#" class="addtocart" title="Add to Cart">
+                        <a href="@Url.Action("ThemVaoGioHang","GioHang", new {MaSP=item.MaSP, strURL=Request.Url.ToString()})" class="addtocart" title="Add to Cart">
                             <i class="fa fa-shopping-cart"></i>
                             <span>Add to Cart</span>
                         </a>
@@ -238,9 +234,9 @@
 
                             <a href="#" class="product-quickview">
                                 <i class="fa fa-share-square-o"></i>
-                                <span>Quick View</span>
+                                <span>Xem Nhanh</span>
                             </a>
-                            <div class="product-label"><span class="new">New</span></div>
+                            <div class="product-label"><span class="new">Mới</span></div>
                         </figure>
                         <div class="product-details-area">
                             <h2 class="product-name"><a href="demo-shop-12-product-details.html" title="@item.Ten">@item.Ten</a></h2>
@@ -258,7 +254,7 @@
                                 <a href="#" class="addtowishlist" title="Add to Wishlist">
                                     <i class="fa fa-heart"></i>
                                 </a>
-                                <a href="#" class="addtocart" title="Add to Cart">
+                                <a href="@Url.Action("ThemVaoGioHang","GioHang", new {MaSP=item.MaSP, strURL=Request.Url.ToString()})" class="addtocart" title="Add to Cart">
                                     <i class="fa fa-shopping-cart"></i>
                                     <span>Add to Cart</span>
                                 </a>

@@ -62,10 +62,27 @@
     <Compile Include="Migrations\201801011653475_ThongKeDoanhThuLoiNhuan.Designer.cs">
       <DependentUpon>201801011653475_ThongKeDoanhThuLoiNhuan.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801021731203_add-nullable-khachhang-matv.cs" />
+    <Compile Include="Migrations\201801021731203_add-nullable-khachhang-matv.Designer.cs">
+      <DependentUpon>201801021731203_add-nullable-khachhang-matv.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801021740196_add-ngaydathang-null-error.cs" />
+    <Compile Include="Migrations\201801021740196_add-ngaydathang-null-error.Designer.cs">
+      <DependentUpon>201801021740196_add-ngaydathang-null-error.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801021744442_add-ngaygiaohang-nullable.cs" />
+    <Compile Include="Migrations\201801021744442_add-ngaygiaohang-nullable.Designer.cs">
+      <DependentUpon>201801021744442_add-ngaygiaohang-nullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801021748329_add-ngaygiaohang-nullable-ok.cs" />
+    <Compile Include="Migrations\201801021748329_add-ngaygiaohang-nullable-ok.Designer.cs">
+      <DependentUpon>201801021748329_add-ngaygiaohang-nullable-ok.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuanLyLinhKienMayTinhDbContext.cs" />
     <Compile Include="Repositories\DonDatHangRepository.cs" />
+    <Compile Include="Repositories\KhachHangRepository.cs" />
     <Compile Include="Repositories\QuyenRepository.cs" />
     <Compile Include="Repositories\LoaiThanhVien_QuyenRepository.cs" />
     <Compile Include="Repositories\LoaiThanhVienRepository.cs" />
@@ -98,6 +115,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801011653475_ThongKeDoanhThuLoiNhuan.resx">
       <DependentUpon>201801011653475_ThongKeDoanhThuLoiNhuan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801021731203_add-nullable-khachhang-matv.resx">
+      <DependentUpon>201801021731203_add-nullable-khachhang-matv.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801021740196_add-ngaydathang-null-error.resx">
+      <DependentUpon>201801021740196_add-ngaydathang-null-error.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801021744442_add-ngaygiaohang-nullable.resx">
+      <DependentUpon>201801021744442_add-ngaygiaohang-nullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801021748329_add-ngaygiaohang-nullable-ok.resx">
+      <DependentUpon>201801021748329_add-ngaygiaohang-nullable-ok.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

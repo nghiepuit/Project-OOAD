@@ -101,7 +101,7 @@
                         <ul class="products-grid columns3">
                             @foreach (var product in Model.Items)
                             {
-                                var url = "/" + product.Ten + ".p-" + product.MaSP + ".html";
+                                var url = "/SanPham/XemChiTiet/" + product.MaSP;
                                 <li>
                                     <div class="product">
                                         <figure class="product-image-area">
@@ -111,7 +111,7 @@
                                             </a>
                                             <a href="#" class="product-quickview">
                                                 <i class="fa fa-share-square-o"></i>
-                                                <span>Quick View</span>
+                                                <span>Xem Nhanh</span>
                                             </a>
                                         </figure>
                                         <div class="product-details-area">
@@ -128,7 +128,7 @@
                                                 <a href="#" class="addtowishlist" title="Add to Wishlist">
                                                     <i class="fa fa-heart"></i>
                                                 </a>
-                                                <a href="javascript:" class="addtocart btnAddToCart" title="Thêm Vào Giỏ Hàng" data-id="@product.MaSP">
+                                                <a href="@Url.Action("ThemVaoGioHang","GioHang", new {MaSP=product.MaSP, strURL=Request.Url.ToString()})" class="addtocart btnAddToCart" title="Thêm Vào Giỏ Hàng" data-id="@product.MaSP">
                                                     <i class="fa fa-shopping-cart"></i>
                                                     <span>Thêm Vào Giỏ Hàng</span>
                                                 </a>

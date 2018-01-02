@@ -1,0 +1,226 @@
+﻿@using QuanLyLinhKienMayTinh.Entities
+@model SanPham
+
+@{
+    ViewBag.Title = Model.Ten;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    IEnumerable<SanPham> SanPhamCungLoai = ViewBag.SanPhamCungLoai as IEnumerable<SanPham>;
+}
+
+<style>
+    #product-vqty {
+        border-radius: 0;
+        width: 35px !important;
+        border-color: #e1e1e1;
+        color: #d0205e;
+        padding-left: 2px;
+        padding-right: 2px;
+        text-align: center;
+    }
+</style>
+
+<section class="page-header">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="/">Trang Chủ</a></li>
+            <li><a href="/LaySanPhamTheoDanhMuc/@Model.LoaiSanPham.MaLSP">@Model.LoaiSanPham.Ten</a></li>
+            <li class="active">@Model.Ten</li>
+        </ul>
+    </div>
+</section>
+<div class="container main-container">
+    <div class="wrapper-container">
+        <div class="container">
+            <div class="product-view">
+                <div class="product-essential">
+                    <div class="row">
+                        <div class="product-img-box col-sm-5">
+                            <div class="product-img-box-wrapper">
+                                <div class="product-img-wrapper">
+                                    <img id="product-zoom" src="~/Assets/images/SanPham/@Model.HinhAnh" alt="@Model.Ten" width="600" height="800">
+                                </div>
+                                <a href="#" class="product-img-zoom" title="Zoom">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </a>
+                            </div>
+                            <div class="owl-carousel manual" id="productGalleryThumbs">
+                                @if (Model.HinhAnh != null)
+                                {
+                                    <div class="product-img-wrapper">
+                                        <a href="#" data-image="~/Assets/images/SanPham/@Model.HinhAnh" data-zoom-image="~/Assets/images/SanPham/@Model.HinhAnh" class="product-gallery-item">
+                                            <img src="~/Assets/images/SanPham/@Model.HinhAnh" alt="@Model.Ten" width="240" height="320">
+                                        </a>
+                                    </div>
+                                }
+                                @if (Model.HinhAnh1 != null)
+                                {
+                                    <div class="product-img-wrapper">
+                                        <a href="#" data-image="~/Assets/images/SanPham/@Model.HinhAnh1" data-zoom-image="~/Assets/images/SanPham/@Model.HinhAnh1" class="product-gallery-item">
+                                            <img src="~/Assets/images/SanPham/@Model.HinhAnh1" alt="@Model.Ten" width="240" height="320">
+                                        </a>
+                                    </div>
+                                }
+                                @if (Model.HinhAnh2 != null)
+                                {
+                                    <div class="product-img-wrapper">
+                                        <a href="#" data-image="~/Assets/images/SanPham/@Model.HinhAnh2" data-zoom-image="~/Assets/images/SanPham/@Model.HinhAnh2" class="product-gallery-item">
+                                            <img src="~/Assets/images/SanPham/@Model.HinhAnh2" alt="@Model.Ten" width="240" height="320">
+                                        </a>
+                                    </div>
+                                }
+                                @if (Model.HinhAnh3 != null)
+                                {
+                                    <div class="product-img-wrapper">
+                                        <a href="#" data-image="~/Assets/images/SanPham/@Model.HinhAnh3" data-zoom-image="~/Assets/images/SanPham/@Model.HinhAnh3" class="product-gallery-item">
+                                            <img src="~/Assets/images/SanPham/@Model.HinhAnh3" alt="@Model.Ten" width="240" height="320">
+                                        </a>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="product-details-box col-sm-7">
+                            <h1 class="product-name">
+                                @Model.Ten
+                            </h1>
+                            <div class="product-rating-container">
+                                <div class="product-ratings">
+                                    <div class="ratings-box">
+                                        <div class="rating" style="width:60%"></div>
+                                    </div>
+                                </div>
+                                <div class="review-link">
+                                    <a href="#" class="review-link-in" rel="nofollow"> <span class="count">1</span> lượt đánh giá</a> |
+                                    <a href="#" class="write-review-link" rel="nofollow">Đánh giá</a>
+                                </div>
+                            </div>
+                            <div class="product-short-desc">
+                                @Html.Raw(Model.MoTa)
+                            </div>
+                            <div class="product-detail-info">
+                                <div class="product-price-box">
+                                    <span class="product-price">@Model.DonGia.ToString("N0") đ</span>
+                                </div>
+                                <p class="availability">
+                                    <span class="font-weight-semibold">Trạng thái:</span>
+                                    @if (Model.SoLuongTon > 0)
+                                    {
+                                        <span>Còn Hàng</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="label label-danger">Hết Hàng</span>
+                                    }
+                                </p>
+                            </div>
+                            <div class="product-actions">
+                                <div class="product-detail-qty">
+                                    <input type="text" value="1" class="vertical-spinner" id="product-vqty">
+                                </div>
+                                @if (Model.SoLuongTon > 0)
+                                {
+                                    <a href="@Url.Action("ThemVaoGioHang","GioHang", new {MaSP=Model.MaSP, strURL=Request.Url.ToString()})" class="addtocart" title="Thêm Vào Giỏ Hàng">
+                                        <i class="fa fa-shopping-cart"></i>
+                                        <span>Mua Ngay</span>
+                                    </a>
+                                }
+                                else{
+                                    <button class="addtocart" disabled style="border: none;">
+                                        <i class="fa fa-shopping-cart"></i>
+                                        <span>Mua Ngay</span>
+                                    </button>
+                                }
+                                <div class="actions-right">
+                                    <a href="#" class="addtowishlist" title="Thêm Vào Yêu Thích">
+                                        <i class="fa fa-heart"></i>
+                                    </a>
+                                    <a href="#" class="comparelink">
+                                        <i class="glyphicon glyphicon-signal"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="product-share-box">
+                                <div class="addthis_inline_share_toolbox"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tabs tabs-vertical tabs-left product-tabs">
+                    <ul class="nav nav-tabs col-sm-3 col-lg-2">
+                        <li class="active">
+                            <a href="#product-desc" data-toggle="tab">Mô Tả</a>
+                        </li>
+                        <li>
+                            <a href="#product-add" data-toggle="tab">Thuộc Tính</a>
+                        </li>
+                        <li>
+                            <a href="#product-tags" data-toggle="tab">Thẻ</a>
+                        </li>
+                        <li>
+                            <a href="#product-reviews" data-toggle="tab">Đánh Giá</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="product-desc" class="tab-pane active">
+                            <div class="product-desc-area">
+                                @Html.Raw(Model.MoTa)
+                            </div>
+                        </div>
+                        <div id="product-add" class="tab-pane">
+                            <h3>Đang cập nhật...</h3>
+                        </div>
+                        <div id="product-tags" class="tab-pane">
+                            <h3>Đang cập nhật...</h3>
+                        </div>
+                        <div id="product-reviews" class="tab-pane">
+                            <h3>Đang cập nhật...</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h2 class="slider-title">
+                <span class="inline-title">Sản Phẩm Cùng Loại</span>
+                <span class="line"></span>
+            </h2>
+            <div class="owl-carousel owl-theme  hide-addtolinks" data-plugin-options="{'items':4, 'margin':20, 'nav':true, 'dots': false, 'loop': false}">
+                @foreach (var item in SanPhamCungLoai)
+                {
+                    <div class="product">
+                        <figure class="product-image-area">
+                            <a href="/SanPham/XemChiTiet/@item.MaSP" title="Product Name" class="product-image">
+                                <img src="~/Assets/images/SanPham/@item.HinhAnh" alt="@item.Ten">
+                            </a>
+                            <a href="#" class="product-quickview">
+                                <i class="fa fa-share-square-o"></i>
+                                <span>Xem Nhanh</span>
+                            </a>
+                            <div class="product-label"><span class="new">New</span></div>
+                        </figure>
+                        <div class="product-details-area">
+                            <h2 class="product-name"><a href="/XemChiTiet/@item.MaSP" title="@item.Ten">@item.Ten</a></h2>
+                            <div class="product-ratings">
+                                <div class="ratings-box">
+                                    <div class="rating" style="width:60%"></div>
+                                </div>
+                            </div>
+                            <div class="product-price-box">
+                                <span class="product-price">@item.DonGia.ToString("N0") đ</span>
+                            </div>
+                            <div class="product-actions">
+                                <a href="#" class="addtowishlist" title="Thêm Vào Yêu Thích">
+                                    <i class="fa fa-heart"></i>
+                                </a>
+                                <a href="#" class="addtocart" title="Mua Ngay">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    <span>Mua Ngay</span>
+                                </a>
+                                <a href="#" class="comparelink">
+                                    <i class="glyphicon glyphicon-signal"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

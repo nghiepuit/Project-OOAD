@@ -3,6 +3,7 @@ using QuanLyLinhKienMayTinh.Service;
 using QuanLyLinhKienMayTinh.Web.Infrastructure.Core;
 using System;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 
 namespace QuanLyLinhKienMayTinh.Web.Controllers
@@ -42,5 +43,22 @@ namespace QuanLyLinhKienMayTinh.Web.Controllers
 
             return View(paginationSet);
         }
+
+        public ActionResult XemChiTiet(int id = -1)
+        {
+            if (id <= 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            SanPham sp = _spService.LayTheoMa(id);
+            if (sp == null)
+            {
+                return HttpNotFound();
+            }
+            int totalRow = 0;
+            ViewBag.SanPhamCungLoai = _spService.LaySanPhamTheoDanhMuc(sp.MaLSP, -1, 1, 10, "", out totalRow);
+            return View(sp);
+        }
+
     }
 }
